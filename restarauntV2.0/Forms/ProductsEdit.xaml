@@ -1,0 +1,53 @@
+﻿<Window x:Class="restarauntV2._0.Forms.ProductsEdit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:btn="clr-namespace:restarauntV2._0.Utilites"
+        xmlns:local="clr-namespace:restarauntV2._0.Forms"
+        mc:Ignorable="d"
+        Title="ProductsEdit" Height="355" AllowsTransparency="True"
+          Width="450" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" Loaded="Window_Loaded" Background="Transparent">
+    <Border CornerRadius="15" Background="#fff" Style="{StaticResource Window_Style}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="55"/>
+            </Grid.RowDefinitions>
+
+            <!--Добавлениеы-->
+
+            <!--Ингредиенты-->
+
+
+
+            <StackPanel Grid.Row="0" Margin="20 20 20 0" HorizontalAlignment="Center">
+                <TextBlock FontSize="18" Style="{StaticResource textblock}" Text="Редактирование продукта"/>
+
+                <TextBlock FontSize="12" Opacity="0.6" Style="{StaticResource textblock}" Text="Изменение записи о продукте" Margin="0 5"/>
+                <TextBox IsReadOnly="True" MaxLength="20" x:Name="Name" Width="380" FontSize="12" Style="{StaticResource pcaholderText}" Margin="0 0 0 10" Tag="Введите название продукта" />
+                <TextBox MaxLength="5" x:Name="Quantity" Width="380" FontSize="12" Style="{StaticResource pcaholderText}" Margin="0 0 0 10" Tag="Введите количество на складе" PreviewTextInput="Quantity_PreviewTextInput"/>
+                <TextBox IsReadOnly="True" MaxLength="4" 
+                         x:Name="Unit_price" Width="380" 
+                         FontSize="12" Style="{StaticResource pcaholderText}" 
+                         Margin="0 0 0 10" Tag="Введите цену за 1 кг" 
+                      />
+                <TextBox IsReadOnly="True" x:Name="Supplier" Margin="0 5 0 0" Width="380" FontSize="12" Style="{StaticResource pcaholderText}" Tag="Выберите поставщика">
+                </TextBox>
+            </StackPanel>
+
+            <!--Выход и добавление-->
+            <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal">
+                <btn:Btn Click="Btn_Click" Style="{StaticResource BtnBackText}" Margin="45 0">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="15" Source="/Images/IconInterface/back.png"/>
+                        <TextBlock FontSize="15" Style="{StaticResource textblock}" Text="Назад"/>
+                    </StackPanel>
+                </btn:Btn>
+
+                <Button x:Name="SafeProduct" Click="SafeProduct_Click" Style="{StaticResource BtnUC}" 
+                        Content="Изменить продукт" Width="270"  Height="45"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,73 @@
+﻿<Window x:Class="restarauntV2._0.Forms.UserEdit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:restarauntV2._0.Forms"
+              xmlns:phoneBox ="clr-namespace:Xceed.Wpf.Toolkit.Obselete;assembly=Xceed.Wpf.Toolkit"
+        xmlns:btn="clr-namespace:restarauntV2._0.Utilites"
+        mc:Ignorable="d"
+        Title="UserEdit" Background="Transparent"  Height="535" AllowsTransparency="True"
+          Width="450" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" Loaded="Window_Loaded">
+    <Border CornerRadius="15" Background="#fff" Style="{StaticResource Window_Style}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="55"/>
+            </Grid.RowDefinitions>
+
+            <!--Добавлениеы-->
+
+            <!--Ингредиенты-->
+
+
+
+            <StackPanel Grid.Row="0" Margin="20 20 20 0" HorizontalAlignment="Center">
+                <TextBlock FontSize="18" Style="{StaticResource textblock}" Text="Редактирование пользователя"/>
+                <TextBlock FontSize="12" Opacity="0.6" Style="{StaticResource textblock}" Text="Изменение учетной записи пользвателя" Margin="0 5"/>
+                <TextBox MaxLength="20" x:Name="Name" Width="380" FontSize="12" Style="{StaticResource pcaholderText}" Margin="0 0 0 10" Tag="Введите имя" PreviewTextInput="Name_PreviewTextInput"/>
+                <TextBox MaxLength="30" x:Name="LastName" Width="380" FontSize="12" Style="{StaticResource pcaholderText}" Margin="0 0 0 10" Tag="Введите Фамилию" PreviewTextInput="LastName_PreviewTextInput"/>
+                <phoneBox:MaskedTextBox  x:Name="Phone" FontSize="12" Style="{StaticResource pcaholderText}" 
+                                        Mask="+7 (###) ###-##-##"
+                                        PromptChar="_"
+                                        Margin="0 0 0 10"/>
+
+
+
+                <TextBox MaxLength="35" x:Name="Email" Width="380" FontSize="12" Style="{StaticResource pcaholderText}" Margin="0 0 0 10" Tag="Введите Почту (не обязательно)" PreviewTextInput="Email_PreviewTextInput"/>
+                <TextBox MaxLength="15" x:Name="Login" Width="380" FontSize="12" Style="{StaticResource pcaholderText}" Margin="0 0 0 10" Tag="Введите Логин" PreviewTextInput="Login_PreviewTextInput"/>
+                <PasswordBox MaxLength="20" x:Name="Password" Width="380" 
+                             FontSize="12" Style="{StaticResource pcaholderPassword}" Margin="0 0 0 5" Tag="Введите Пароль"
+                             PasswordChanged="Password_PasswordChanged"  PreviewTextInput="Password_PreviewTextInput" />
+                <btn:Btn Style="{StaticResource BtnBackText}" Click="Btn_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="15" Source="/Images/IconInterface/refresh.png" />
+                        <TextBlock Margin="5 0" Style="{StaticResource textblock}" Text="Сгенерировать пароль"/>
+                    </StackPanel>
+                </btn:Btn>
+
+
+                <ComboBox Height="45" x:Name="Role" SelectionChanged="Role_SelectionChanged" Margin="0 5" Width="380" FontSize="12"
+                          Style="{StaticResource ComboBox}" Tag="Выберите роль">
+                    <ComboBoxItem Margin="0 5 0 0" FontFamily="/Fonts/#Poppins" FontSize="12" Content="Администратор"/>
+                    <ComboBoxItem Margin="0 5 0 0" FontFamily="/Fonts/#Poppins" FontSize="12" Content="Менеджер"/>
+                    <ComboBoxItem Margin="0 5 0 0" FontFamily="/Fonts/#Poppins" FontSize="12" Content="Шеф"/>
+                    <ComboBoxItem Margin="0 5 0 0" FontFamily="/Fonts/#Poppins" FontSize="12" Content="Официант"/>
+                </ComboBox>
+            </StackPanel>
+
+            <!--Выход и добавление-->
+            <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal">
+                <btn:Btn Click="Btn_Click_1" Style="{StaticResource BtnBackText}" Margin="45 0">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="15" Source="/Images/IconInterface/back.png"/>
+                        <TextBlock FontSize="15" Style="{StaticResource textblock}" Text="Назад"/>
+                    </StackPanel>
+                </btn:Btn>
+
+                <Button x:Name="SafeUser" Click="SafeUser_Click" Style="{StaticResource BtnUC}"
+                        Content="Изменить Пользователя" Width="270"  Height="45"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

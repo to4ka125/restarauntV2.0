@@ -1,0 +1,99 @@
+﻿<Window x:Class="restarauntV2._0.Forms.Waiter.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:uc ="clr-namespace:restarauntV2._0.Model"
+        xmlns:local="clr-namespace:restarauntV2._0.Forms.Waiter"
+        mc:Ignorable="d"
+       
+        Title="Order" Icon="/Images/IconRestaraunt/Logo.png " Height="705" Width="880" Background="Transparent" WindowStyle="None" Loaded="Window_Loaded"  AllowsTransparency="true"
+        WindowStartupLocation="CenterScreen">
+    <Border CornerRadius="15" Background="#fff" Style="{StaticResource Window_Style}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="370"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel  Grid.Column="0" Margin="10">
+                <TextBlock TextAlignment="Center" x:Name="Title"  Style="{StaticResource textblock}" Text="ЗАКУСКА"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="598"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+
+                    <ScrollViewer VerticalScrollBarVisibility="Hidden"  Height="580" Grid.Row="0" >
+                        <StackPanel x:Name="container"/>
+                    </ScrollViewer>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <Button Height="50" Click="Button_Click"  Width="490" Style="{StaticResource BtnUC}"  Content="Вернуться назад"/>
+                    </StackPanel>
+                </Grid>
+
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Margin="10">
+                <ComboBox Height="40"  SelectionChanged="TableBox_SelectionChanged" x:Name="TableBox" Style="{StaticResource ComboBox}" Tag="Выберите столик" Margin="0 0 0 5">
+                    <ComboBoxItem Margin="5" FontSize="15" FontFamily="/Fonts/#Poppins" Content="Стол 1"/>
+                    <ComboBoxItem Margin="5" FontSize="15" FontFamily="/Fonts/#Poppins" Content="Стол 2"/>
+                    <ComboBoxItem Margin="5" FontSize="15" FontFamily="/Fonts/#Poppins" Content="Стол 3"/>
+                    <ComboBoxItem Margin="5" FontSize="15" FontFamily="/Fonts/#Poppins" Content="Стол 4"/>
+                    <ComboBoxItem Margin="5" FontSize="15" FontFamily="/Fonts/#Poppins" Content="Стол 5"/>
+                    <ComboBoxItem Margin="5" FontSize="15" FontFamily="/Fonts/#Poppins" Content="Стол 6"/>
+                    <ComboBoxItem Margin="5" FontSize="15" FontFamily="/Fonts/#Poppins" Content="Стол 7"/>
+                    <ComboBoxItem Margin="5" FontSize="15" FontFamily="/Fonts/#Poppins" Content="Стол 8"/>
+                </ComboBox>
+                <TextBlock Style="{StaticResource textblock}" TextAlignment="Center" Text="СОСТАВ ЗАКАЗА"/>
+
+                <DataGrid x:Name="MenuDataGrid"
+                          IsReadOnly="True"
+                          Margin="0 5"
+                     
+                      RowHeight="45"
+                      FontFamily="/Fonts/#Poppins"
+                      FontSize="15"
+                      
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False" 
+                      Height="445"
+                      MaxHeight="450" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="№" Binding="{Binding countOrder}" Width="28"/>
+                        <DataGridTextColumn Header="Наименование" Binding="{Binding name}" Width="170"/>
+                        <DataGridTextColumn Header="Кол-во" Binding="{Binding quantity}" Width="65"/>
+                        <DataGridTextColumn Header="Цена" Binding="{Binding price}" Width="85"/>
+                    </DataGrid.Columns>
+
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Height" Value="50"/>
+                            <Setter Property="Padding" Value="5"/>
+                            
+                            <Setter Property="Background" Value="#F85D5D"/>
+                            <Setter Property="Foreground" Value="#fff"/>
+
+                            <Setter Property="FontSize" Value="15"/>
+                            <Setter Property="FontFamily" Value="/Fonts/#Poppins"/>
+                            <Setter Property="BorderBrush" Value="#FFAAAAAA"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+                        </Style>
+                     
+
+                    </DataGrid.Resources>
+                </DataGrid>
+                <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0 20">
+                    <TextBlock TextAlignment="Center" FontSize="18" Text="Итого" Style="{StaticResource textblock}" Foreground="#333"/>
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" >
+                        <TextBlock Name="TotalPrice"  FontSize="24" Style="{StaticResource textblock}" Text="0" Foreground="#F85D5D"/>
+                        <TextBlock  Margin="5 0" FontSize="24" Style="{StaticResource textblock}" Text="₽" Foreground="#F85D5D"/>
+                    </StackPanel>
+                    <Button Name="AddOrderBtn" Click="Button_Click_1" Margin="0 15" Style="{StaticResource BtnUC}" Width="330" Height="50" Content="Отправить на кухню"/>
+                </StackPanel>
+
+            </StackPanel>
+
+        </Grid>
+    </Border>
+</Window>

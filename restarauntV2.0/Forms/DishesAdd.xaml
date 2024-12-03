@@ -1,0 +1,120 @@
+﻿<Window x:Class="restarauntV2._0.Forms.DishesAdd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:restarauntV2._0.Forms"
+        xmlns:btn="clr-namespace:restarauntV2._0.Utilites"
+        mc:Ignorable="d"
+        Title="Добавление блюда" Background="Transparent"  Height="630" AllowsTransparency="True"
+        Width="760" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" Loaded="Window_Loaded">
+    <Border CornerRadius="15" Background="#fff" Style="{StaticResource Window_Style}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="210"/>
+                <RowDefinition Height="55"/>
+            </Grid.RowDefinitions>
+            <!--Добавлениеы-->
+            <StackPanel Grid.Row="0" HorizontalAlignment="Center" Margin="0 5 0 0">
+                <TextBlock FontSize="18" Style="{StaticResource textblock}" Text="Добавления блюда"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Margin="0 10">
+
+                        <Border Width="280" Height="280" BorderThickness="1" BorderBrush="#333" CornerRadius="10">
+                            <Image x:Name="image" Stretch="Fill" />
+                        </Border>
+                      
+                        <btn:Btn Style="{StaticResource BtnBackText}" HorizontalAlignment="Center" Margin="0 10 0 0" Click="Btn_Click_1">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="20" Source="/Images/IconInterface/addImage.png"/>
+                                <TextBlock Style="{StaticResource textblock}" FontSize="12" Text="Добавить изображение"/>
+                            </StackPanel>
+                        </btn:Btn>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBox MaxLength="20" x:Name="NameBox" Style="{StaticResource pcaholderText}"  FontSize="12" Tag="Наименование" Width="340" Height="45" PreviewTextInput="NameBox_PreviewTextInput"/>
+
+                        <ComboBox SelectionChanged="CategoriesBox_SelectionChanged" x:Name="CategoriesBox" Style="{StaticResource ComboBox}" Tag="Категория" Width="340" Height="45" Margin="0 20" IsReadOnly="True" >
+                            <ComboBoxItem FontFamily="/Fonts/#Poppins" Margin="1.5" Content="1 Закуски"/>
+                            <ComboBoxItem FontFamily="/Fonts/#Poppins" Margin="1.5" Content="2 Салаты"/>
+                            <ComboBoxItem FontFamily="/Fonts/#Poppins" Margin="1.5" Content="3 Супы"/>
+                            <ComboBoxItem FontFamily="/Fonts/#Poppins" Margin="1.5" Content="4 Суши и Сашими"/>
+                            <ComboBoxItem FontFamily="/Fonts/#Poppins" Margin="1.5" Content="5 Основные блюда"/>
+                            <ComboBoxItem FontFamily="/Fonts/#Poppins" Margin="1.5" Content="6 Десерты"/>
+                        </ComboBox>
+
+                        <TextBox MaxLength="150" x:Name="DescriptionBox" Style="{StaticResource pcaholderText}"  FontSize="12" Tag="Описание" Width="340" TextWrapping="Wrap" Height="80" PreviewTextInput="DescriptionBox_PreviewTextInput"/>
+
+                        <TextBox MaxLength="4" IsReadOnly="False" x:Name="PriceBox" Style="{StaticResource pcaholderText}"  FontSize="12" Margin="0 20 0 0" Tag="Цена" Width="340" Height="45" PreviewTextInput="PriceBox_PreviewTextInput"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+            <!--Ингредиенты-->
+            <StackPanel Grid.Row="2" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <TextBlock Grid.Row="0" Style="{StaticResource textblock}" Text="Состав Блюда"  Margin="50 5"/>
+                        <ScrollViewer Grid.Row="1" Grid.Column="0" Height="180" VerticalScrollBarVisibility="Hidden">
+                            <StackPanel x:Name="ingredients">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  Margin="0 0 0 20">
+                                    <ComboBox Tag="Ингредиент 1" Style="{StaticResource ComboBox}" Margin="0 0 20 0" Width="240"/>
+                                    <TextBox Padding="10" FontSize="12" Style="{StaticResource pcaholderText}"  Tag="Кол-во" Height="40" Width="80"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  Margin="0 0 0 20">
+                                    <ComboBox Tag="Ингредиент 2" Style="{StaticResource ComboBox}" Margin="0 0 20 0" Width="240"/>
+                                    <TextBox Padding="10" FontSize="12" Style="{StaticResource pcaholderText}"  Tag="Кол-во" Height="40" Width="80"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  Margin="0 0 0 20">
+                                    <ComboBox Tag="Ингредиент 3" Style="{StaticResource ComboBox}" Margin="0 0 20 0" Width="240"/>
+                                    <TextBox Padding="10" FontSize="12" Style="{StaticResource pcaholderText}"  Tag="Кол-во" Height="40" Width="80"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </StackPanel>
+
+
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource textblock}" HorizontalAlignment="Center" Text="Кол-во ингредиенты"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button x:Name="DellIngredients" Click="DellIngredients_Click" Style="{StaticResource BtnUC}" Width="40" Height="40" Content="-"/>
+                            <TextBlock x:Name="CountIngredients" Style="{StaticResource textblock}" Margin="20" Text="3" VerticalAlignment="Center"/>
+                            <Button x:Name="AddIngredients" Click="AddIngredients_Click" Style="{StaticResource BtnUC}" Width="40" Height="40" Content="+"/>
+                        </StackPanel>
+
+                    </StackPanel>
+
+
+                </Grid>
+            </StackPanel>
+            <!--Выход и добавление-->
+            <StackPanel Grid.Row="3" VerticalAlignment="Center" Orientation="Horizontal">
+                <btn:Btn Click="Btn_Click" Style="{StaticResource BtnBackText}" Margin="45 0">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="15" Source="/Images/IconInterface/back.png"/>
+                        <TextBlock Style="{StaticResource textblock}" Text="Назад"/>
+                    </StackPanel>
+                </btn:Btn>
+
+                <Button x:Name="SafeDishes" Click="SafeDishes_Click" Style="{StaticResource BtnUC}" Content="Сохранить блюдо" Width="600"  Height="45"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

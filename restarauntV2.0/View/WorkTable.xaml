@@ -1,0 +1,157 @@
+﻿<Window x:Class="restarauntV2._0.View.WorkTable"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:restarauntV2._0.View"
+        xmlns:Menu="clr-namespace:restarauntV2._0.Utilites"
+        mc:Ignorable="d"
+        Title="WorkTable"  Background="Transparent" Height="700" Width="1050" 
+        Icon="/Images/IconRestaraunt/Logo.png"
+        AllowsTransparency="False"
+        WindowStartupLocation="CenterScreen" 
+        WindowStyle="None" ResizeMode="NoResize" Loaded="Window_Loaded">
+    <Border Style="{StaticResource Window_Style}" Background="#fff" CornerRadius="10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" BorderBrush="#333" BorderThickness="0 0 1 0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <!--Logo-->
+                    <Border CornerRadius="10 0 0 0" Grid.Row="0" Background="#F85D5D">
+                        <StackPanel VerticalAlignment="Center"  Orientation="Horizontal">
+                            <Image Margin="20 0 10 0" Width="30" Source="/Images/IconRestaraunt/Logo.png"/>
+                            <StackPanel>
+                                <TextBlock FontSize="12" Foreground="#fff" Opacity="0.7" Text="ресторан"/>
+                                <TextBlock FontSize="15" FontFamily="/Fonts/#Lobster" Foreground="#fff" Text="Фудзияма"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                    <!--User-->
+                    <StackPanel Margin="0 5 0 0" Grid.Row="1">
+                        <StackPanel Orientation="Horizontal">
+                            <Border Margin="20 0 10 0" Width="30" Height="30" BorderBrush="#333" BorderThickness="1" CornerRadius="5">
+                                <Image Stretch="Fill" x:Name="imageRole" Margin="2" Source="/Images/IconUser/Admin.png"/>
+                            </Border>
+                            <StackPanel>
+                                <TextBlock Name="Role" Opacity="0.7" Text="Администратор"/>
+                                <TextBlock Name="UserName" Style="{StaticResource textblock}" Text="Беляков Виктор"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                    <!--Menu-->
+                    <StackPanel Grid.Row="2">
+                        <Rectangle Width="250" Height="2" Stroke="#333" Opacity="0.8" StrokeThickness="0.8"/>
+
+                        <Menu:Btn Style="{StaticResource BtnMenu}" IsChecked="True"  x:Name="Home"  Click="menu_Click">
+                                <Grid>
+                                    <StackPanel Width="260" Orientation="Horizontal">
+                                        <Image Margin="20 0 0 0" Width="20" Source="/Images/IconImage/Home.png"/>
+                                        <TextBlock Margin="15" Style="{StaticResource textblock}" Text="Главная"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Menu:Btn>
+                        <Menu:Btn  Style="{StaticResource BtnMenu}" x:Name="Report"  Visibility="Collapsed">
+                            <Grid>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Margin="20 0 0 0" Width="20" Source="/Images/IconImage/clipboard.png"/>
+                                    <TextBlock Margin="15" Style="{StaticResource textblock}" Text="Отчеты"/>
+                                </StackPanel>
+                            </Grid>
+                        </Menu:Btn>
+
+                        <Menu:Btn  Style="{StaticResource BtnMenu}" x:Name="Dishes" Click="menu_Click">
+                            <Grid>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Margin="20 0 0 0" Width="20" Source="/Images/IconImage/Cloche.png"/>
+                                    <TextBlock Margin="15" Style="{StaticResource textblock}" Text="Блюда"/>
+                                </StackPanel>
+                            </Grid>
+                        </Menu:Btn>
+
+                        <Menu:Btn  Style="{StaticResource BtnMenu}" x:Name="Orders" Click="menu_Click">
+                            <Grid>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Margin="20 0 0 0" Width="20" Source="/Images/IconImage/order.png"/>
+                                    <TextBlock Margin="15" Style="{StaticResource textblock}" Text="Заказы"/>
+                                </StackPanel>
+                            </Grid>
+                        </Menu:Btn>
+
+                        <Menu:Btn Click="menu_Click"  Style="{StaticResource BtnMenu}" x:Name="Drinks" >
+                            <Grid>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Margin="20 0 0 0" Width="20" Source="/Images/IconImage/tea.png"/>
+                                    <TextBlock Margin="15" Style="{StaticResource textblock}" Text="Безалкогольные напитки"/>
+                                </StackPanel>
+                            </Grid>
+                        </Menu:Btn>
+
+                        <Menu:Btn Click="menu_Click"  Style="{StaticResource BtnMenu}" x:Name="AlcoholicDrinks">
+                            <Grid>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Margin="20 0 0 0" Width="20" Source="/Images/IconImage/sake.png"/>
+                                    <TextBlock Margin="15" Style="{StaticResource textblock}" Text="Алкогольные напитки"/>
+                                </StackPanel>
+                            </Grid>
+                        </Menu:Btn>
+
+                        <Menu:Btn Click="menu_Click"  Style="{StaticResource BtnMenu}" x:Name="User">
+                            <Grid>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Margin="20 0 0 0" Width="20" Source="/Images/IconImage/Users.png"/>
+                                    <TextBlock Margin="15" Style="{StaticResource textblock}" Text="Пользоователи"/>
+                                </StackPanel>
+                            </Grid>
+                        </Menu:Btn>
+
+                        <Menu:Btn  Style="{StaticResource BtnMenu}" Click="menu_Click" x:Name="Products">
+                            <Grid>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Margin="20 0 0 0" Width="20" Source="/Images/IconImage/box.png"/>
+                                    <TextBlock Margin="15" Style="{StaticResource textblock}" Text="Склад"/>
+                                </StackPanel>
+                            </Grid>
+                        </Menu:Btn>
+
+                        <Menu:Btn  Style="{StaticResource BtnMenu}" Click="menu_Click" x:Name="Menu" >
+                            <Grid>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Margin="20 0 0 0" Width="20" Source="/Images/IconImage/restaurant.png"/>
+                                    <TextBlock Margin="15" Style="{StaticResource textblock}" Text="Меню"/>
+                                </StackPanel>
+                            </Grid>
+                        </Menu:Btn>
+
+                        <Rectangle Width="260" Height="2" Stroke="#333" Opacity="0.8" StrokeThickness="0.8"/>
+                    </StackPanel>
+                    <!--Exit-->
+                    <StackPanel Grid.Row="3" VerticalAlignment="Bottom">
+                        <Menu:Btn Style="{StaticResource BtnMenuExit}" Click="Btn_Click">
+                            <Grid >
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Margin="20 0 0 0" Width="20" Source="/Images/IconImage/power-button.png"/>
+                                    <TextBlock Style="{StaticResource textblock}"  Margin="15"  Text="Выход"/>
+                                </StackPanel>
+                            </Grid>
+                        </Menu:Btn>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <StackPanel  Margin="10 10" x:Name="container" Grid.Column="1">
+              
+            </StackPanel>
+        </Grid>
+
+    </Border>
+</Window>

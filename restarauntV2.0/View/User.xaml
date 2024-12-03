@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="restarauntV2._0.View.User"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:btn="clr-namespace:restarauntV2._0.Utilites"
+             xmlns:local="clr-namespace:restarauntV2._0.View"
+             mc:Ignorable="d" 
+         Style="{StaticResource Page_Style}"
+              d:DesignHeight="700" d:DesignWidth="780" Loaded="UserControl_Loaded">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="600"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <TextBlock FontSize="18"  Style="{StaticResource textblock}"  Text="Пользователи"/>
+        </StackPanel>
+
+
+
+        <StackPanel Grid.Row="1" Margin="0 10">
+            <DataGrid x:Name="dataGridView"
+                      HeadersVisibility="Column" RowHeight="30" FontSize="14"  MaxHeight="530"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                      FontFamily="/Fonts/#Poppins" SelectionChanged="dataGridView_SelectionChanged"
+                      IsReadOnly="True" 
+                      
+                      >
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Height" Value="40"/>
+                        <Setter Property="Padding" Value="5"/>
+
+                        <!-- Задаем высоту заголовка -->
+                        <Setter Property="Background" Value="#F85D5D"/>
+                        <!-- Цвет фона заголовка -->
+                        <Setter Property="Foreground" Value="#fff"/>
+                        <!-- Цвет текста заголовка -->
+                        <Setter Property="FontWeight" Value="Bold"/>
+
+                        <Setter Property="FontFamily" Value="/Fonts/#Poppins"/>
+                        <!-- Жирный шрифт -->
+                        <Setter Property="BorderBrush" Value="#FFAAAAAA"/>
+                        <!-- Цвет границы -->
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <!-- Толщина границы -->
+                    </Style>
+
+                </DataGrid.Resources>
+            </DataGrid>
+        </StackPanel>
+
+
+        <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal" >
+            <Button x:Name="AddBtn" Click="Button_Click" Style="{StaticResource BtnUC}" Content="Добавить" Width="200" Height="45"/>
+            <Button x:Name="EditBtn" Click="Button_Click_1" Style="{StaticResource BtnUC}" Content="Изменить" Margin="10 0 " Width="200" Height="45"/>
+            <Button x:Name="DelBtn" Click="Button_Click_2" Style="{StaticResource BtnUC}" Content="Удалить" Width="200" Height="45"/>
+
+        </StackPanel>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,50 @@
+﻿<Window x:Class="restarauntV2._0.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:restarauntV2._0"
+        mc:Ignorable="d"
+        
+        Title="MainWindow" AllowsTransparency="True"
+          Icon="/Images/IconRestaraunt/Logo.png"
+        Background="Transparent" Loaded="Window_Loaded" Height="600" Width="850" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize">
+    <Border CornerRadius="15" Background="#fff" Style="{StaticResource Window_Style}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="425"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+
+            <Border Grid.Column="0" CornerRadius="10 0 0 10" Background="#F85D5D" >
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock TextAlignment="Center" FontFamily="/Fonts/#Lobster" FontSize="35" Foreground="#fff" Opacity="0.9">Ресторан<LineBreak/>Фудзияма</TextBlock>
+                    <TextBlock FontFamily="/Fonts/#Poppins" Foreground="#fff" Margin="0 10" FontSize="15" Opacity="0.6">Пожалуйста авторизуйтесь</TextBlock>
+                </StackPanel>
+            </Border>
+
+            <Grid  Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+  
+                    <Button Click="Button_Click" HorizontalAlignment="Right" Margin="0 10 10 0"  Style="{StaticResource BtnClose}" RenderTransformOrigin="0.508,0.5"/>
+  
+          
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Grid.Row="0">
+
+                   
+                </StackPanel>
+                <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBox PreviewTextInput="loginBox_PreviewTextInput" MaxLength="20" Style="{StaticResource pcaholderText}" Tag="Логин" x:Name="loginBox" Width="280" Height="50"/>
+                    <PasswordBox MaxLength="20" PasswordChanged="passwordBox_PasswordChanged" Style="{StaticResource pcaholderPassword }" Tag="Пароль" x:Name="passwordBox" Width="280" Height="50" Margin="0 20"/>
+        
+                    <Button x:Name="signIN" Style="{StaticResource btnStyle}" 
+                            Content="Войти" Width="180" Height="50" Margin="0 20" Click="signIN_Click"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
