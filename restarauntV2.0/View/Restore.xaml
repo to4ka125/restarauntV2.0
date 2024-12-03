@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:restarauntV2._0.View"
              mc:Ignorable="d" 
-            Height="450" Width="550" Background="#fff">
+            Height="450" Width="450" Background="#fff">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button x:Name="RestoreBtn" Style="{StaticResource btnStyle}" Height="80" Width="280" Content="Востановить структру"/>

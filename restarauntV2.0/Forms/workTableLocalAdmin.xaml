@@ -7,7 +7,7 @@
         xmlns:Menu="clr-namespace:restarauntV2._0.Utilites"
         xmlns:viev ="clr-namespace:restarauntV2._0.View"
         mc:Ignorable="d"
-        Title="workTableLocalAdmin" Height="450" Width="800" Background="Transparent" WindowStartupLocation="CenterOwner" WindowStyle="None">
+        Title="workTableLocalAdmin" Height="450" Width="700" Background="Transparent" WindowStartupLocation="CenterOwner" WindowStyle="None">
     <Border Style="{StaticResource Window_Style}" Background="#fff" CornerRadius="10">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -84,7 +84,7 @@
             </Border>
 
             <StackPanel Grid.Column="1">
-                <viev:Restore></viev:Restore>
+                <viev:Import/>
             </StackPanel>
         </Grid>
     </Border>
