@@ -1,4 +1,5 @@
-﻿using System;
+﻿using restarauntV2._0.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,7 +27,27 @@ namespace restarauntV2._0.Forms
 
         private void Btn_Click(object sender, RoutedEventArgs e)
         {
+            this.Close();
+        }
 
+        private void Restore_Click(object sender, RoutedEventArgs e)
+        {
+            var radioButton = sender as RadioButton;
+
+            radioButton.IsChecked = true;
+            container.Children.Clear();
+            switch (radioButton.Name)
+            {
+                case "Restore":
+                    Restore restore = new Restore();
+                    container.Children.Add(restore);
+                    break;
+                   
+                case "Import":
+                    Import import = new Import();
+                    container.Children.Add(import);
+                    break;
+            }
         }
     }
 }

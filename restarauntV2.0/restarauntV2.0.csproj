@@ -734,5 +734,10 @@
   <ItemGroup>
     <Resource Include="Images\IconImage\download.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Backup\restaraunt.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

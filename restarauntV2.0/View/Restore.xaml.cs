@@ -1,5 +1,8 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using restarauntV2._0.Utilites;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +26,36 @@ namespace restarauntV2._0.View
         public Restore()
         {
             InitializeComponent();
+        }
+
+        private void RestoreBtn_Click(object sender, RoutedEventArgs e)
+        {
+            string backupPath = "Backup\\restaraunt.sql"; // Дамп структуры базы данных
+            string databaseName = "restaurant"; // База данных
+            using (MySqlConnection con = new MySqlConnection(MySqlCon.con))
+            {
+                con.Open();
+                MySqlCommand cmdCheckExists = new MySqlCommand($"SELECT COUNT(*) FROM information_schema.schemata WHERE schema_name = '{databaseName}';", con);
+                int dbExists = Convert.ToInt32(cmdCheckExists.ExecuteScalar());
+
+                if (dbExists > 0)
+                {
+                    MySqlCommand cmdDrop = new MySqlCommand($"DROP DATABASE IF EXISTS `{databaseName}`;", con);
+                    cmdDrop.ExecuteNonQuery();
+                }
+                MySqlCommand cmdCreate = new MySqlCommand($"CREATE DATABASE `{databaseName}`;", con);
+                cmdCreate.ExecuteNonQuery();
+
+                MySqlCommand cmdUse = new MySqlCommand($"USE `{databaseName}`;", con);
+                cmdUse.ExecuteNonQuery();
+
+                string script = File.ReadAllText(backupPath);
+                MySqlScript sqlScript = new MySqlScript(con, script);
+                sqlScript.Execute();
+
+                con.Close();
+            }
+            MessageBox.Show("Востановление структуры прошло успешно");
         }
     }
 }

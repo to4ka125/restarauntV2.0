@@ -8,7 +8,7 @@
             Height="450" Width="450" Background="#fff">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button x:Name="RestoreBtn" Style="{StaticResource btnStyle}" Height="80" Width="280" Content="Востановить структру"/>
+            <Button x:Name="RestoreBtn" Style="{StaticResource btnStyle}" Height="80" Width="280" Content="Востановить структру" Click="RestoreBtn_Click"/>
         </StackPanel>
     </Grid>
 </UserControl>

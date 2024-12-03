@@ -27,16 +27,16 @@ namespace restarauntV2._0.View
     {
 
         string query = @"SELECT 
-                         Menu.menu_id, 
-                         Menu.name AS 'Наименование', 
-                         Menu.description AS 'Описание', 
-                         Categories.name AS 'Категория',  
-                         CONCAT(Menu.price, ' ₽') AS 'Цена',
+                         menu.menu_id, 
+                         menu.name AS 'Наименование', 
+                         menu.description AS 'Описание', 
+                         categories.name AS 'Категория',  
+                         CONCAT(menu.price, ' ₽') AS 'Цена',
                          terminalStatus
                          FROM 
-                             Menu
+                             menu
                          INNER JOIN 
-                         Categories ON Menu.category_id = Categories.category_id Where  Menu.category_id=7
+                         categories ON menu.category_id = categories.category_id Where  menu.category_id=7
                         ";
         public Drinks()
         {
@@ -90,14 +90,14 @@ namespace restarauntV2._0.View
 
         private void filteringAndSorting()
         {
-            query = @"SELECT Menu.menu_id, 
-                        Menu.name AS 'Наименование', 
-                        Menu.description AS 'Описание', 
-                        Categories.name AS 'Категория',  
-                        CONCAT(Menu.price, ' ₽') AS 'Цена',
+            query = @"SELECT menu.menu_id, 
+                        menu.name AS 'Наименование', 
+                        menu.description AS 'Описание', 
+                        categories.name AS 'Категория',  
+                        CONCAT(menu.price, ' ₽') AS 'Цена',
                         terminalStatus
-                        FROM Menu 
-                        INNER JOIN Categories ON Menu.category_id = Categories.category_id ";
+                        FROM menu 
+                        INNER JOIN categories ON menu.category_id = categories.category_id ";
 
             string sortOrder = null;
 
@@ -107,10 +107,10 @@ namespace restarauntV2._0.View
                 switch (selectedSortValue)
                 {
                     case "По возврастанию":
-                        sortOrder = "ORDER BY Menu.name ASC";
+                        sortOrder = "ORDER BY menu.name ASC";
                         break;
                     case "По убыванию":
-                        sortOrder = "ORDER BY Menu.name DESC";
+                        sortOrder = "ORDER BY menu.name DESC";
                         break;
                 }
             }
@@ -123,15 +123,15 @@ namespace restarauntV2._0.View
             {
                 if (hasWhereClause)
                 {
-                    query += $" AND (Menu.name LIKE '%{filterText}%' OR Menu.description LIKE '%{filterText}%')";
+                    query += $" AND (menu.name LIKE '%{filterText}%' OR menu.description LIKE '%{filterText}%')";
                 }
                 else
                 {
-                    query += $" WHERE (Menu.name LIKE '%{filterText}%' OR Menu.description LIKE '%{filterText}%')";
+                    query += $" WHERE (menu.name LIKE '%{filterText}%' OR menu.description LIKE '%{filterText}%')";
                     hasWhereClause = true;
                 }
             }
-            query += (hasWhereClause ? " AND" : " WHERE") + " Menu.category_id = 7";
+            query += (hasWhereClause ? " AND" : " WHERE") + " menu.category_id = 7";
 
             if (sortOrder != null)
             {
@@ -209,15 +209,15 @@ namespace restarauntV2._0.View
         {
 
             query = @"SELECT 
-                         Menu.menu_id, 
-                         Menu.name AS 'Наименование', 
-                         Menu.description AS 'Описание', 
-                         Categories.name AS 'Категория',  
-                         CONCAT(Menu.price, ' ₽') AS 'Цена' 
+                         menu.menu_id, 
+                         menu.name AS 'Наименование', 
+                         menu.description AS 'Описание', 
+                         categories.name AS 'Категория',  
+                         CONCAT(menu.price, ' ₽') AS 'Цена' 
                          FROM 
-                             Menu
+                             menu
                          INNER JOIN 
-                         Categories ON Menu.category_id = Categories.category_id Where  Menu.category_id=7
+                         Categories ON menu.category_id = categories.category_id Where  menu.category_id=7
                         ";
 
             searchBox.Clear();
@@ -264,7 +264,7 @@ namespace restarauntV2._0.View
 
                 if (MessageBox.Show("Вы уверены, что хотите показть это блюдо на терминале?\n\nЭто действие можно будет отменить.", "Подтверждение действия", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    using (MySqlCommand cmd = new MySqlCommand($"Update  Menu Set terminalStatus = 'Показать' Where menu_id = '{SafeData.drinks_id}'", con))
+                    using (MySqlCommand cmd = new MySqlCommand($"Update  menu Set terminalStatus = 'Показать' Where menu_id = '{SafeData.drinks_id}'", con))
                     {
 
                         cmd.ExecuteNonQuery();
@@ -285,7 +285,7 @@ namespace restarauntV2._0.View
 
                 if (MessageBox.Show("Вы уверены, что хотите скрыть это блюдо с терминала?\n\nЭто действие можно будет отменить.", "Подтверждение действия", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    using (MySqlCommand cmd = new MySqlCommand($"Update  Menu Set terminalStatus = 'Скрыть' Where menu_id = '{SafeData.drinks_id}'", con))
+                    using (MySqlCommand cmd = new MySqlCommand($"Update  menu Set terminalStatus = 'Скрыть' Where menu_id = '{SafeData.drinks_id}'", con))
                     {
 
                         cmd.ExecuteNonQuery();

@@ -40,7 +40,7 @@ namespace restarauntV2._0.View
                     con.Open();
 
                     MySqlCommand cmd = new MySqlCommand(@"Select user_id, name As 'Имя', lastName 'Фамилия', login As 'Логин', role As 'Роль', 
-                                                           email As 'почта', phone As 'Телефон' From Users ", con);
+                                                           email As 'почта', phone As 'Телефон' From users ", con);
                     MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     da.Fill(dt);

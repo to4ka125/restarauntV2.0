@@ -29,15 +29,15 @@ namespace restarauntV2._0.View
     public partial class Products : UserControl
     {
         string query = @"SELECT 
-                             Products.product_id, 
-                             Products.name AS 'Наименование', 
-                             Concat( Products.quantity,' кг.') AS 'Остаток на складе', 
-                             CONCAT( Products.unit_price, ' руб.') AS 'Цена за кг',
-                             Supplier.name AS 'Поставщик'                                                       
+                             products.product_id, 
+                             products.name AS 'Наименование', 
+                             Concat( products.quantity,' кг.') AS 'Остаток на складе', 
+                             CONCAT( products.unit_price, ' руб.') AS 'Цена за кг',
+                             supplier.name AS 'Поставщик'                                                       
                              FROM 
-                               Products
+                               products
                                INNER JOIN 
-                               Supplier ON Products.supplier_id = Supplier.supplier_id";
+                               supplier ON products.supplier_id = supplier.supplier_id";
         public Products()
         {
             InitializeComponent();
@@ -77,15 +77,15 @@ namespace restarauntV2._0.View
         private void filteringAndSorting()
         {
             query = @"SELECT 
-                             Products.product_id, 
-                             Products.name AS 'Наименование', 
-                             Concat( Products.quantity,' кг.') AS 'Остаток на складе', 
-                             CONCAT( Products.unit_price, ' руб.') AS 'Цена за кг',
-                             Supplier.name AS 'Поставщик'                                                       
+                             products.product_id, 
+                             products.name AS 'Наименование', 
+                             Concat( products.quantity,' кг.') AS 'Остаток на складе', 
+                             CONCAT( products.unit_price, ' руб.') AS 'Цена за кг',
+                             supplier.name AS 'Поставщик'                                                       
                              FROM 
-                               Products
+                               products
                                INNER JOIN 
-                               Supplier ON Products.supplier_id = Supplier.supplier_id";
+                               supplier ON products.supplier_id = supplier.supplier_id";
 
             string sortOrder = null;
             if (Sorting.SelectedItem != null)
@@ -94,10 +94,10 @@ namespace restarauntV2._0.View
                 switch (selectedSortValue)
                 {
                     case "По возврастанию":
-                        sortOrder = "ORDER BY Products.name ASC";
+                        sortOrder = "ORDER BY products.name ASC";
                         break;
                     case "По убыванию":
-                        sortOrder = "ORDER BY Products.name DESC";
+                        sortOrder = "ORDER BY products.name DESC";
                         break;
                 }
             }
@@ -105,7 +105,7 @@ namespace restarauntV2._0.View
             string filterText = searchBox.Text;
             if (!string.IsNullOrEmpty(filterText))
             {
-                    query += $" WHERE (Products.name LIKE '%{filterText}%')";
+                    query += $" WHERE (products.name LIKE '%{filterText}%')";
             }
 
             if (sortOrder != null)
@@ -183,15 +183,15 @@ namespace restarauntV2._0.View
         private void Clear_Click(object sender, RoutedEventArgs e)
         {
             query = @"SELECT 
-                             Products.product_id, 
-                             Products.name AS 'Наименование', 
-                             Concat( Products.quantity,' кг.') AS 'Остаток на складе', 
-                             CONCAT( Products.unit_price, ' руб.') AS 'Цена за кг',
-                             Supplier.name AS 'Поставщик'                                                       
+                             products.product_id, 
+                             products.name AS 'Наименование', 
+                             Concat( products.quantity,' кг.') AS 'Остаток на складе', 
+                             CONCAT( products.unit_price, ' руб.') AS 'Цена за кг',
+                             supplier.name AS 'Поставщик'                                                       
                              FROM 
-                               Products
+                               products
                                INNER JOIN 
-                               Supplier ON Products.supplier_id = Supplier.supplier_id";
+                               supplier ON products.supplier_id = supplier.supplier_id";
             Sorting.SelectedItem = null;
             UpdateDataGridView(query);
             MessageBox.Show("Фильтры успешно очищены.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -227,15 +227,15 @@ namespace restarauntV2._0.View
         private void ReportBtn_Click(object sender, RoutedEventArgs e)
         {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            string query = @"SELECT   Products.product_id As 'Номер продукта', 
-                             Products.name AS 'Наименование', 
-                             Concat(Products.quantity, ' кг.') AS 'Остаток на складе', 
-                             CONCAT(Products.unit_price, ' руб.') AS 'Цена за кг',
-                             Supplier.name AS 'Поставщик'
+            string query = @"SELECT   products.product_id As 'Номер продукта', 
+                             products.name AS 'Наименование', 
+                             Concat(products.quantity, ' кг.') AS 'Остаток на складе', 
+                             CONCAT(products.unit_price, ' руб.') AS 'Цена за кг',
+                             supplier.name AS 'Поставщик'
                              FROM
-                               Products
+                               products
                                INNER JOIN
-                               Supplier ON Products.supplier_id = Supplier.supplier_id WHERE Products.quantity < 5";
+                               supplier ON products.supplier_id = supplier.supplier_id WHERE products.quantity < 5";
 
             using (MySqlConnection connection = new MySqlConnection(MySqlCon.con))
             {

@@ -151,7 +151,7 @@
             </Border>
 
             <StackPanel  Margin="10 10" x:Name="container" Grid.Column="1" >
-                <local:Restore/>
+            
             </StackPanel>
         </Grid>
 

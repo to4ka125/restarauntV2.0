@@ -47,7 +47,7 @@ namespace restarauntV2._0.Forms
                     {
                         con.Open();
 
-                        MySqlCommand cmd = new MySqlCommand("Select product_id, name From Products ", con);
+                        MySqlCommand cmd = new MySqlCommand("Select product_id, name From products ", con);
 
                         MySqlDataReader dr = cmd.ExecuteReader();
 
@@ -266,14 +266,14 @@ namespace restarauntV2._0.Forms
 
 
                           
-                            using (MySqlCommand cmd = new MySqlCommand("SELECT MAX(menu_id) FROM Menu;", con))
+                            using (MySqlCommand cmd = new MySqlCommand("SELECT MAX(menu_id) FROM menu;", con))
                             {
                                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                                 DataTable dt = new DataTable();
                                 da.Fill(dt);
                                 maxId = int.Parse(dt.Rows[0].ItemArray[0].ToString());
                             }
-                            using (MySqlCommand cmd = new MySqlCommand($@"Insert into Menu_Ingredients 
+                            using (MySqlCommand cmd = new MySqlCommand($@"Insert into menu_ingredients 
                                                                               (menu_id,product_id,quantity) Values('{maxId+1}','{productId}','{Quantity.ToString().Replace(',','.')}')", con))
                                 {
                                     cmd.ExecuteNonQuery();
@@ -283,7 +283,7 @@ namespace restarauntV2._0.Forms
                         }
                     }
 
-                using (MySqlCommand cmd = new MySqlCommand($@"Insert into Menu (name,description,price,category_id,Image,terminalStatus) 
+                using (MySqlCommand cmd = new MySqlCommand($@"Insert into menu (name,description,price,category_id,Image,terminalStatus) 
                                                               Values('{name}', '{description}','{price}','{categoriesId}','{fileName}', 'Показать')", con))
                 {
                     cmd.ExecuteNonQuery();

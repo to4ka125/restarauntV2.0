@@ -107,7 +107,7 @@ namespace restarauntV2._0
                         SafeData.userName = $"{dt.Rows[0].ItemArray[1]} {dt.Rows[0].ItemArray[2]}";
                         SafeData.userId = dt.Rows[0].ItemArray[0].ToString();
                         MessageBox.Show("Вы успешно авторизованы!",
-                        "Успех",
+                        "Успех",    
                         MessageBoxButton.OK,
                         MessageBoxImage.Information);
                         Blur.workTable = new WorkTable();
@@ -140,6 +140,9 @@ namespace restarauntV2._0
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            workTableLocalAdmin workTableLocalAdmin = new workTableLocalAdmin();
+            workTableLocalAdmin.ShowDialog();
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

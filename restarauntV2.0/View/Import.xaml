@@ -5,20 +5,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:btn="clr-namespace:restarauntV2._0.Utilites"
              xmlns:local="clr-namespace:restarauntV2._0.View"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
+                Loaded="UserControl_Loaded"
               Height="450" Width="450" Background="#fff">
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            <ComboBox Name="tablesName" Style="{StaticResource ComboBox}" Height="50" 
+            <ComboBox Name="tablesName" Style="{StaticResource ComboBox}" Height="60" 
                       Tag="Выберите таблицу для импортирования"
                       Width="280"/>
 
-            <Button Width="280" Height="45" Style="{StaticResource btnStyle}" Margin="0 10" Content="Выбрать файл"/>
+            <Button Width="280" Height="60" Style="{StaticResource btnStyle}" Margin="0 10" Content="Выбрать файл" Click="Button_Click"/>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Style="{StaticResource textblock}" FontSize="12" Text="Выбранный файл: "/>
-                <TextBlock Style="{StaticResource textblock}" FontSize="12" Opacity="0.7" Text="user.csv"/>
+                <TextBlock x:Name="FileName" Style="{StaticResource textblock}" FontSize="12" Opacity="0.7" Text="user.csv"/>
             </StackPanel>
-            <Button Width="280" Height="45" Style="{StaticResource btnStyle}" Margin="0 10" Content="Импортировать"/>
+            <Button Width="280" Height="60" Style="{StaticResource btnStyle}" Margin="0 10" Content="Импортировать" Click="Button_Click_1"/>
            
 
         </StackPanel>

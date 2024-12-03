@@ -14,8 +14,8 @@ namespace restarauntV2._0.View
     {
         string query = @"SELECT order_id As 'Номер заказа', us.name As 'Имя официанта', 
                          us.lastName As 'Фамилия официанта', o.table_number As 'Номер стола',
-                         o.status As 'Статус', o.order_time As 'Дата заказа', Concat (total_price, ' ₽') As 'Стоимость заказа' From Orders o
-                         inner Join Users us On us.user_id  = o.user_id";
+                         o.status As 'Статус', o.order_time As 'Дата заказа', Concat (total_price, ' ₽') As 'Стоимость заказа' From orders o
+                         inner Join users us On us.user_id  = o.user_id";
         string id;
         public Order()
         {
@@ -42,8 +42,8 @@ namespace restarauntV2._0.View
                         using (MySqlConnection con = new MySqlConnection(MySqlCon.con))
                         {
                             con.Open();
-                            using (MySqlCommand cmd = new MySqlCommand($@"SELECT order_id, m.name As 'Наименование блюда', oi.quantity As 'Количество' FROM restaurant.Order_Items oi 
-                                                                            inner join Menu m on m.menu_id = oi.menu_id
+                            using (MySqlCommand cmd = new MySqlCommand($@"SELECT order_id, m.name As 'Наименование блюда', oi.quantity As 'Количество' FROM restaurant.order_items oi 
+                                                                            inner join menu m on m.menu_id = oi.menu_id
                                                                             where order_id = {id}; ", con))
                             {
                                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -70,7 +70,7 @@ namespace restarauntV2._0.View
                 if (MessageBox.Show($"Заказ №{id} готов к выдаче?", "Подтвердите действие", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand($"Update Orders Set status = 'Завершен' where order_id ='{id}' ", con))
+                    using (MySqlCommand cmd = new MySqlCommand($"Update orders Set status = 'Завершен' where order_id ='{id}' ", con))
                     {
                         cmd.ExecuteNonQuery();
                         UpdateDataGridView(query);
@@ -83,8 +83,8 @@ namespace restarauntV2._0.View
         {
             query = @"SELECT order_id As 'Номер заказа', us.name As 'Имя официанта', 
                          us.lastName As 'Фамилия официанта', o.table_number As 'Номер стола',
-                         o.status As 'Статус', o.order_time As 'Дата заказа', Concat (total_price, ' ₽') As 'Стоимость заказа' From Orders o
-                         inner Join Users us On us.user_id  = o.user_id";
+                         o.status As 'Статус', o.order_time As 'Дата заказа', Concat (total_price, ' ₽') As 'Стоимость заказа' From orders o
+                         inner Join users us On us.user_id  = o.user_id";
 
             bool hasWhereClause = false;
 
@@ -190,7 +190,7 @@ namespace restarauntV2._0.View
                 if (MessageBox.Show($"Вы уверенны что хотите отменить заказ №{id}?", "Подтвердите действие", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand($"Update Orders Set status = 'Отменен' where order_id ='{id}' ", con))
+                    using (MySqlCommand cmd = new MySqlCommand($"Update orders Set status = 'Отменен' where order_id ='{id}' ", con))
                     {
                         cmd.ExecuteNonQuery();
                         UpdateDataGridView(query);
@@ -205,8 +205,8 @@ namespace restarauntV2._0.View
         {
             query = @"SELECT order_id As 'Номер заказа', us.name As 'Имя официанта', 
                          us.lastName As 'Фамилия официанта', o.table_number As 'Номер стола',
-                         o.status As 'Статус', o.order_time As 'Дата заказа', Concat (total_price, ' ₽') As 'Стоимость заказа' From Orders o
-                         inner Join Users us On us.user_id  = o.user_id";
+                         o.status As 'Статус', o.order_time As 'Дата заказа', Concat (total_price, ' ₽') As 'Стоимость заказа' From orders o
+                         inner Join users us On us.user_id  = o.user_id";
             datePicker.SelectedDate = null;
             Filtering.SelectedItem = null;
             UpdateDataGridView(query);
