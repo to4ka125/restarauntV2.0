@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="restarauntV2._0.View.Restore"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:restarauntV2._0.View"
+             mc:Ignorable="d" 
+            Height="450" Width="550" Background="#fff">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button x:Name="RestoreBtn" Style="{StaticResource btnStyle}" Height="80" Width="280" Content="Востановить структру"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
