@@ -56,7 +56,7 @@ namespace restarauntV2._0.Forms
             using (MySqlConnection con = new MySqlConnection(MySqlCon.con))
             {
                 con.Open();
-                using (MySqlCommand cmd = new MySqlCommand($"Update Products Set quantity = '{Quantity.Text.Replace(',', '.')}' Where product_id = '{SafeData.product_id}' ", con))
+                using (MySqlCommand cmd = new MySqlCommand($"Update products Set quantity = '{Quantity.Text.Replace(',', '.')}' Where product_id = '{SafeData.product_id}' ", con))
                 {
                     try
                     {
@@ -91,9 +91,9 @@ namespace restarauntV2._0.Forms
                                                                 p.unit_price AS 'Unit Price', 
                                                                 CONCAT(p.supplier_id, '-', s.name) AS 'Supplier Info'
                                                                 FROM 
-                                                                    Products p
+                                                                    products p
                                                                 INNER JOIN 
-                                                                    Supplier s ON s.supplier_id = p.supplier_id
+                                                                    supplier s ON s.supplier_id = p.supplier_id
                                                                 WHERE 
                                                                     p.product_id ='{SafeData.product_id}'", con))
                 {

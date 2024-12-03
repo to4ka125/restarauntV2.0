@@ -85,7 +85,7 @@ namespace restarauntV2._0.Forms
             using (MySqlConnection con = new MySqlConnection(MySqlCon.con))
             {
                 con.Open();
-                using (MySqlCommand cmd = new MySqlCommand($@"Insert into Products (name,quantity,unit_price,supplier_id) 
+                using (MySqlCommand cmd = new MySqlCommand($@"Insert into products (name,quantity,unit_price,supplier_id) 
                                                               Values ('{name}','{quantity}','{unitPrice}','{supplierId}')",con))
                 {
                     cmd.ExecuteNonQuery();
@@ -109,7 +109,7 @@ namespace restarauntV2._0.Forms
             using (MySqlConnection con = new MySqlConnection(MySqlCon.con))
             {
                 con.Open();
-                using (MySqlCommand cmd = new MySqlCommand("Select supplier_id,name From Supplier",con))
+                using (MySqlCommand cmd = new MySqlCommand("Select supplier_id,name From supplier",con))
                 {
                     MySqlDataReader dr = cmd.ExecuteReader();
 

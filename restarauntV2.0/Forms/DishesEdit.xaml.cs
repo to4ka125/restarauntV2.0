@@ -164,7 +164,7 @@ namespace restarauntV2._0.Forms
 
                 }
                 */
-                using (MySqlCommand cmd =  new MySqlCommand($@"Select * From Menu Where menu_id = '{SafeData.menuId}'",con))
+                using (MySqlCommand cmd =  new MySqlCommand($@"Select * From menu Where menu_id = '{SafeData.menuId}'",con))
                 {
                     MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
@@ -339,7 +339,7 @@ namespace restarauntV2._0.Forms
                 } */
 
 
-                using (MySqlCommand cmd = new MySqlCommand($@"Update Menu Set name = '{name}',description = '{description}',
+                using (MySqlCommand cmd = new MySqlCommand($@"Update menu Set name = '{name}',description = '{description}',
                                                                            price = '{price}',category_id ='{categoriesId}',Image ='{fileName}' where menu_id ='{SafeData.menuId}'", con))
                 {
                     cmd.ExecuteNonQuery();

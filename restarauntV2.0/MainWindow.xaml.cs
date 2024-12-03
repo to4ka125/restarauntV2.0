@@ -76,6 +76,30 @@ namespace restarauntV2._0
 
         private void signIN_Click(object sender, RoutedEventArgs e)
         {
+            if (loginBox.Text == Properties.Settings.Default.LocalAdminLogin)
+            {
+                if (passwordBox.Password == Properties.Settings.Default.LocalAdminPwd)
+                {
+                    MessageBox.Show("Вы успешно авторизованы!",
+                        "Успех",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Information);
+                    workTableLocalAdmin workTableLocalAdmin = new workTableLocalAdmin();
+                    this.Visibility = Visibility.Collapsed;
+                    workTableLocalAdmin.ShowDialog();
+                    this.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    MessageBox.Show("К сожалению, введённый пароль неверен. Пожалуйста, попробуйте снова.",
+                                         "Ошибка входа",
+                                         MessageBoxButton.OK,
+                                         MessageBoxImage.Error);
+                    passwordBox.Clear();
+                }
+            }
+
+
             using (MySqlConnection con = new MySqlConnection(MySqlCon.con))
             {
                 try
@@ -140,9 +164,7 @@ namespace restarauntV2._0
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            workTableLocalAdmin workTableLocalAdmin = new workTableLocalAdmin();
-            workTableLocalAdmin.ShowDialog();
-
+         
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

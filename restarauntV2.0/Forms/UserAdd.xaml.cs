@@ -58,7 +58,7 @@ namespace restarauntV2._0.Forms
                     string email = Email.Text;
                     string phone = Phone.Text;
 
-                    MySqlCommand cmd = new MySqlCommand($@"Insert into restaurant.Users (name, lastName, login, password, role, email, phone)
+                    MySqlCommand cmd = new MySqlCommand($@"Insert into restaurant.users (name, lastName, login, password, role, email, phone)
                                                           Values ('{name}','{lastName}', '{login}','{password}','{role}','{email}','{phone}')",con);
 
                     cmd.ExecuteNonQuery();
@@ -101,7 +101,7 @@ namespace restarauntV2._0.Forms
         {
             MySqlConnection con = new MySqlConnection(MySqlCon.con);
             con.Open();
-            MySqlCommand cmd = new MySqlCommand($@"SELECT COUNT(*) FROM Users WHERE login = '{login}'", con);
+            MySqlCommand cmd = new MySqlCommand($@"SELECT COUNT(*) FROM users WHERE login = '{login}'", con);
 
             int count = Convert.ToInt32(cmd.ExecuteScalar());
 

@@ -46,7 +46,7 @@ namespace restarauntV2._0.Forms
                 if (Password.Password == "")
                 {
                     query = $@"Update 
-                               Users set name ='{Name.Text}',
+                               users set name ='{Name.Text}',
                                lastName = '{LastName.Text}',
                                login = '{Login.Text}',
                                role = '{Role.Text}', 
@@ -57,7 +57,7 @@ namespace restarauntV2._0.Forms
                 else
                 {
                     query = $@"Update 
-                               Users set name ='{Name.Text}',
+                               users set name ='{Name.Text}',
                                lastName = '{LastName.Text}', 
                                login = '{Login.Text}',
                                password ='{GetHashPass(Password.Password)}',
@@ -148,7 +148,7 @@ namespace restarauntV2._0.Forms
             using (MySqlConnection  con = new MySqlConnection(MySqlCon.con))
             {
                 con.Open();
-                using (MySqlCommand cmd = new MySqlCommand($"Select * From Users Where user_id = '{SafeData.userIdEdit}'",con))
+                using (MySqlCommand cmd = new MySqlCommand($"Select * From users Where user_id = '{SafeData.userIdEdit}'",con))
                 {
                     MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                     DataTable dt = new DataTable();

@@ -76,7 +76,7 @@ namespace restarauntV2._0.Forms
             {
                 con.Open();
 
-                using (MySqlCommand cmd = new MySqlCommand($@"Insert into Menu (name,description,price,category_id,Image,terminalStatus) 
+                using (MySqlCommand cmd = new MySqlCommand($@"Insert into menu (name,description,price,category_id,Image,terminalStatus) 
                                                               Values('{name}', '{description}','{price}','{categoriesId}','{fileName}','Показать')", con))
                 {
                     MessageBox.Show("🎉 Напиток успешно добавлено!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);

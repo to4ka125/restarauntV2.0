@@ -74,7 +74,7 @@ namespace restarauntV2._0.Forms
             using (MySqlConnection con = new MySqlConnection(MySqlCon.con))
             {
                 con.Open();
-                using (MySqlCommand cmd = new MySqlCommand($@"Update Menu Set name = '{name}',category_id = '{categoriesId}',description ='{description}',price='{price}' 
+                using (MySqlCommand cmd = new MySqlCommand($@"Update menu Set name = '{name}',category_id = '{categoriesId}',description ='{description}',price='{price}' 
                                                               where menu_id = '{SafeData.drinks_id}'", con))
                 {
                     cmd.ExecuteNonQuery();
@@ -90,8 +90,8 @@ namespace restarauntV2._0.Forms
             {
                 con.Open();
 
-                using (MySqlCommand cmd = new MySqlCommand($@"Select m.menu_id, m.name, concat(m.category_id,' ',c.name) ,m.description , m.price, m.Image From  Menu m 
-                                                              Inner join Categories c  ON c.category_id = m.category_id
+                using (MySqlCommand cmd = new MySqlCommand($@"Select m.menu_id, m.name, concat(m.category_id,' ',c.name) ,m.description , m.price, m.Image From  menu m 
+                                                              Inner join categories c  ON c.category_id = m.category_id
                                                              Where menu_id = '{SafeData.drinks_id}'",con))
                 {
                     MySqlDataAdapter da = new MySqlDataAdapter(cmd);
