@@ -52,10 +52,12 @@ namespace restarauntV2._0.View
             string[] titleField = readText[0].Split(';').Select(field => field.Trim().Trim('"')).ToArray();
             string tableName = tablesName.Text;
             string[] valField;
-            string query=string.Empty;
+            string errorMsg = string.Empty;
+            string query = string.Empty;
             int count = 0;
             using (MySqlConnection con = new MySqlConnection(MySqlCon.con))
             {
+               
                 con.Open();
 
                 string[] dbHeaders = GetDataBaseHeaderCheck(con, tableName);
@@ -66,11 +68,11 @@ namespace restarauntV2._0.View
                     con.Open();
                     foreach (string str in readText.Skip(1).ToArray())
                     {
-                        valField = str.Split(';').Select(field=>field.Trim().Trim('"')).ToArray();
-                        switch (tableName) 
+                        valField = str.Split(';').Select(field => field.Trim().Trim('"')).ToArray();
+                        switch (tableName)
                         {
                             case "users":
-                                query = $@"Insert into `users`({string.Join(",",titleField)}) Values ('{valField[0]}','{valField[1]}',
+                                query = $@"Insert into `users`({string.Join(",", titleField)}) Values ('{valField[0]}','{valField[1]}',
                                             '{valField[2]}','{valField[3]}','{valField[4]}','{valField[5]}','{valField[6]}','{valField[7]}')";
                                 break;
 
@@ -79,8 +81,8 @@ namespace restarauntV2._0.View
                                             '{valField[2]}','{valField[3]}')";
                                 break;
 
-                            case "suppliers":
-                                query = $@"Insert into `suppliers`({string.Join(",", titleField)}) Values ('{valField[0]}','{valField[1]}',
+                            case "supplier":
+                                query = $@"Insert into `supplier` ({string.Join(",", titleField)}) Values ('{valField[0]}','{valField[1]}',
                                             '{valField[2]}','{valField[3]}','{valField[4]}','{valField[5]}')";
                                 break;
 
@@ -90,6 +92,18 @@ namespace restarauntV2._0.View
                                 break;
 
                             case "products":
+                                var supplierkQuery = $"SELECT COUNT(*) FROM supplier WHERE supplier_id = '{valField[4]}'";
+
+                                using (MySqlCommand supplierCheck = new MySqlCommand(supplierkQuery, con))
+                                {
+                                    count = int.Parse(supplierCheck.ExecuteScalar().ToString());
+                                    if (count == 0)
+                                    {
+                                        MessageBox.Show("Сначала заполните таблицу поставщики");
+                                        return;
+                                    }
+                                }
+
                                 query = $@"Insert into `products`({string.Join(",", titleField)}) Values ('{valField[0]}','{valField[1]}',
                                             '{valField[2]}','{valField[3]}','{valField[4]}')";
                                 break;
@@ -100,7 +114,7 @@ namespace restarauntV2._0.View
                                 using (MySqlCommand orderCheck = new MySqlCommand(ordersCheckQuery, con))
                                 {
                                     count = int.Parse(orderCheck.ExecuteScalar().ToString());
-                                    if (count==0)
+                                    if (count == 0)
                                     {
                                         MessageBox.Show("Сначала заполните таблицу пользователи");
                                         return;
@@ -118,17 +132,17 @@ namespace restarauntV2._0.View
                                 using (MySqlCommand menuCheck = new MySqlCommand(menuOrderCheckQuery, con))
                                 {
                                     count = int.Parse(menuCheck.ExecuteScalar().ToString());
-                                    if (count==0)
+                                    if (count == 0)
                                     {
                                         MessageBox.Show("Сначала заполните таблицу меню");
                                         return;
                                     }
                                 }
-
+                                var orderCount = 0;
                                 using (MySqlCommand orderCheck = new MySqlCommand(orderCheckQuery, con))
                                 {
-                                   count = int.Parse(orderCheck.ExecuteScalar().ToString());
-                                    if (count==0)
+                                    orderCount = int.Parse(orderCheck.ExecuteScalar().ToString());
+                                    if (orderCount == 0)
                                     {
                                         MessageBox.Show("Сначала заполните таблицу заказы");
                                         return;
@@ -142,28 +156,29 @@ namespace restarauntV2._0.View
                             case "menu_ingredients":
 
                                 var menuCheckQuery = $"SELECT COUNT(*) FROM menu WHERE menu_id = '{valField[0]}'";
-                                var productCheckQuery = $"SELECT COUNT(*) FROM products WHERE products = '{valField[1]}'";
-                              
-                                using (MySqlCommand menuCheck = new MySqlCommand(menuCheckQuery,con))
+                                var productCheckQuery = $"SELECT COUNT(*) FROM products WHERE product_id = '{valField[1]}'";
+
+                                using (MySqlCommand menuCheck = new MySqlCommand(menuCheckQuery, con))
                                 {
                                     count = int.Parse(menuCheck.ExecuteScalar().ToString());
-                                    if (count==0)
+                                    if (count == 0)
                                     {
                                         MessageBox.Show("Сначала заполните таблицу меню");
                                         return;
                                     }
                                 }
 
+                                var countProduct = 0;
                                 using (MySqlCommand productCheck = new MySqlCommand(productCheckQuery, con))
                                 {
-                                   count = int.Parse(productCheck.ExecuteScalar().ToString());
-                                    if (count==0)
+                                    countProduct = int.Parse(productCheck.ExecuteScalar().ToString());
+                                    if (countProduct == 0)
                                     {
                                         MessageBox.Show("Сначала заполните таблицу продукты");
                                         return;
                                     }
                                 }
-                                    query = $@"Insert into `orders`({string.Join(",", titleField)}) Values ('{valField[0]}','{valField[1]}',
+                                query = $@"Insert into `orders`({string.Join(",", titleField)}) Values ('{valField[0]}','{valField[1]}',
                                             '{valField[2]}')";
                                 break;
 
@@ -174,7 +189,7 @@ namespace restarauntV2._0.View
                                 using (MySqlCommand categoriesCheck = new MySqlCommand(categoriesCheckQuery, con))
                                 {
                                     count = int.Parse(categoriesCheck.ExecuteScalar().ToString());
-                                    if (count==0)
+                                    if (count == 0)
                                     {
                                         MessageBox.Show("Сначала заполните таблицу категории");
                                         return;
@@ -195,24 +210,33 @@ namespace restarauntV2._0.View
                                           )";
                                 break;
                         }
-                        
-                            using (MySqlCommand cmd = new MySqlCommand(query, con))
-                            {
+
+                        using (MySqlCommand cmd = new MySqlCommand(query, con))
+                        {
                             try
                             {
                                 cmd.ExecuteNonQuery();
                             }
-                            catch (Exception)
+                            catch (Exception ex)
                             {
+                                errorMsg = ex.Message;
+                            }
 
-                            }
-                                
-                            }
+
+
+                        }
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Ошибка импортирования","Ошибка",MessageBoxButton.OK,MessageBoxImage.Error);
+
+                    MessageBox.Show("Данные импортированны");
+
+                    tablesName.SelectedItem = null;
+                    
+                    if (errorMsg.Length > 0) MessageBox.Show(errorMsg);
+
+                    else
+                    {
+                        MessageBox.Show("Ошибка импортирования", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
             }
         }
@@ -221,7 +245,16 @@ namespace restarauntV2._0.View
         {
             using (MySqlConnection con = new MySqlConnection(MySqlCon.con))
             {
-                con.Open();
+                try
+                {
+                    con.Open();
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message,"Ошибка",MessageBoxButton.OK,MessageBoxImage.Error);
+                    return;
+                }
+               
                 using (MySqlCommand cmd = new MySqlCommand($@"SHOW TABLES", con))
                 {
                     MySqlDataReader dr = cmd.ExecuteReader();
@@ -246,6 +279,20 @@ namespace restarauntV2._0.View
             }
 
 
+        }
+
+        private void tablesName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TextBlock textBlock = (TextBlock)tablesName.Template.FindName("textBlock",tablesName);
+
+            if (tablesName.SelectedItem==null)
+            {
+                textBlock.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                textBlock.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

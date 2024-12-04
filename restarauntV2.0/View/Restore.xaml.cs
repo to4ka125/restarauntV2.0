@@ -32,7 +32,9 @@ namespace restarauntV2._0.View
         {
             string backupPath = "Backup\\restaraunt.sql"; // Дамп структуры базы данных
             string databaseName = "restaurant"; // База данных
-            using (MySqlConnection con = new MySqlConnection(MySqlCon.con))
+
+            string conString = "host=127.0.0.1; uid=root;pwd=;";
+            using (MySqlConnection con = new MySqlConnection(conString))
             {
                 con.Open();
                 MySqlCommand cmdCheckExists = new MySqlCommand($"SELECT COUNT(*) FROM information_schema.schemata WHERE schema_name = '{databaseName}';", con);

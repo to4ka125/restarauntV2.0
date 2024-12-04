@@ -9,10 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="780" Loaded="UserControl_Loaded">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="19*"/>
-            <ColumnDefinition Width="111*"/>
-        </Grid.ColumnDefinitions>
+        
 
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -24,7 +21,7 @@
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,0,0.2">
             <TextBlock Style="{StaticResource textblock}" FontSize="18"  Text="Блюда"/>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Background="#fff" Grid.ColumnSpan="2" Margin="0,31,0,335.6" Grid.RowSpan="3" >
+        <StackPanel Orientation="Horizontal" Grid.Row="1"  >
             <Border CornerRadius="5" Width="320" Height="45"  BorderThickness="1" BorderBrush="#333">
                 <StackPanel Orientation="Horizontal">
                     <TextBox x:Name="searchBox" TextChanged="searchBox_TextChanged" FontSize="12" Style="{StaticResource pcaholderTextSearchBox}"

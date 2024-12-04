@@ -10,7 +10,7 @@
               Height="450" Width="450" Background="#fff">
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            <ComboBox Name="tablesName" Style="{StaticResource ComboBox}" Height="60" 
+            <ComboBox SelectionChanged="tablesName_SelectionChanged" Name="tablesName" Style="{StaticResource ComboBox}" Height="60" 
                       Tag="Выберите таблицу для импортирования"
                       Width="280"/>
 
