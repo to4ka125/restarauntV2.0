@@ -226,17 +226,14 @@ namespace restarauntV2._0.View
 
                         }
                     }
-
+           
                     MessageBox.Show("Данные импортированны");
 
                     tablesName.SelectedItem = null;
                     
                     if (errorMsg.Length > 0) MessageBox.Show(errorMsg);
 
-                    else
-                    {
-                        MessageBox.Show("Ошибка импортирования", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
+            
                 }
             }
         }

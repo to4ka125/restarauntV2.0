@@ -28,7 +28,7 @@ namespace restarauntV2._0.View
     /// </summary>
     public partial class Products : UserControl
     {
-        string query = @"SELECT 
+        string query = $@"SELECT 
                              products.product_id, 
                              products.name AS 'Наименование', 
                              Concat( products.quantity,' кг.') AS 'Остаток на складе', 
@@ -37,14 +37,21 @@ namespace restarauntV2._0.View
                              FROM 
                                products
                                INNER JOIN 
-                               supplier ON products.supplier_id = supplier.supplier_id";
+                               supplier ON products.supplier_id = supplier.supplier_id 
+                            ";
         public Products()
         {
             InitializeComponent();
         }
+        private int currentPage = 1;
+        private const int pageSize = 15;
+        private int totalRecords;
+
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+
+
             switch (SafeData.role)
             {
                 case "Шеф":
@@ -57,8 +64,23 @@ namespace restarauntV2._0.View
                     EditBtn.Visibility = Visibility.Collapsed;
                     break;
             }
-            EditBtn.IsEnabled = false;
-            UpdateDataGridView(query);
+
+                EditBtn.IsEnabled = false;
+            UpdateDataGridView(query,1);
+
+
+            for (int i =0; i < (int)Math.Ceiling((double)totalRecords/pageSize ); i++)
+            {
+                var paginationBtn = new Button
+                {
+                    Width = 30,
+                    Height = 30,
+                    Style = (Style)FindName("BtnUC"),
+                    Content = i + 1.ToString()
+                };
+
+                paginationBar.Children.Add(paginationBtn);
+            }
         }
 
         private void searchBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -114,16 +136,26 @@ namespace restarauntV2._0.View
             }
 
 
-            UpdateDataGridView(query);
+            UpdateDataGridView(query,1);
         }
 
-        private void UpdateDataGridView(string query)
+        private void UpdateDataGridView(string query, int page)
         {
+
+            query += $@" Limit {(page - 1) *pageSize}, {pageSize}";
             DataTable dataTable = new DataTable();
             using (MySqlConnection connection = new MySqlConnection(MySqlCon.con))
             {
                 MySqlDataAdapter dataAdapter = new MySqlDataAdapter(query, connection);
                 connection.Open();
+
+                string countQuery = "SELECT COUNT(*) FROM products";
+
+
+                MySqlCommand countCommand = new MySqlCommand(countQuery, connection);
+
+                totalRecords = Convert.ToInt32(countCommand.ExecuteScalar());
+
                 try
                 {
                     dataAdapter.Fill(dataTable);
@@ -156,7 +188,7 @@ namespace restarauntV2._0.View
             this.Opacity = 0.5;
 
             productsAdd.ShowDialog();
-            UpdateDataGridView(query);
+            UpdateDataGridView(query,1);
             EditBtn.IsEnabled = false;
             Blur.workTable.Effect = null;
             Blur.workTable.IsEnabled = true;
@@ -193,7 +225,7 @@ namespace restarauntV2._0.View
                                INNER JOIN 
                                supplier ON products.supplier_id = supplier.supplier_id";
             Sorting.SelectedItem = null;
-            UpdateDataGridView(query);
+            UpdateDataGridView(query,1);
             MessageBox.Show("Фильтры успешно очищены.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
@@ -215,7 +247,7 @@ namespace restarauntV2._0.View
 
             productsEdit.ShowDialog();
             EditBtn.IsEnabled = false;
-            UpdateDataGridView(query);
+            UpdateDataGridView(query,1);
             Blur.workTable.Effect = null;
             Blur.workTable.IsEnabled = true;
             Blur.workTable.Opacity = 1;

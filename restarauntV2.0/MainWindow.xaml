@@ -40,7 +40,7 @@
             
             </StackPanel>
             
-            <Border Grid.Column="1"  Panel.ZIndex="1"  x:Name="BorderAnimation" CornerRadius="10 0 0 10" Background="#F85D5D" >
+            <Border Grid.Column="0"  Panel.ZIndex="1"  x:Name="BorderAnimation" CornerRadius="10 0 0 10" Background="#F85D5D" >
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                     <TextBlock TextAlignment="Center" FontFamily="/Fonts/#Lobster" FontSize="35" Foreground="#fff" Opacity="0.9">Ресторан<LineBreak/>Фудзияма</TextBlock>
                     <TextBlock FontFamily="/Fonts/#Poppins" Foreground="#fff" Margin="0 10" FontSize="15" Opacity="0.6">Пожалуйста авторизуйтесь</TextBlock>

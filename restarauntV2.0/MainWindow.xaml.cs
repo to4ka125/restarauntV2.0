@@ -278,7 +278,7 @@ namespace restarauntV2._0
             if (captchaText == CaptchaBox.Text)
             {
                 MessageBox.Show("Капча пройдена");
-                Grid.SetColumn(BorderAnimation, 1);
+                Grid.SetColumn(BorderAnimation, 0);
             }
             else
             {

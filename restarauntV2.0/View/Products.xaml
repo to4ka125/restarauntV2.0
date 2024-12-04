@@ -14,6 +14,7 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
@@ -43,7 +44,7 @@
 
         <StackPanel Grid.Row="2" Margin="0 10">
             <DataGrid x:Name="dataGridView"
-                      HeadersVisibility="Column" RowHeight="30" FontSize="14" MaxHeight="530"
+                      HeadersVisibility="Column" RowHeight="30" FontSize="14" MaxHeight="500"
                       ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
                       FontFamily="/Fonts/#Poppins" SelectionChanged="dataGridView_SelectionChanged"
                       IsReadOnly="True"
@@ -71,7 +72,11 @@
                 </DataGrid.Resources>
             </DataGrid>
         </StackPanel>
-        <StackPanel Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal">
+        <StackPanel Grid.Row="3" Orientation="Horizontal" x:Name="paginationBar">
+            <Button Style="{StaticResource BtnUC}" Content="1" Height="30" Width="30" Margin="0 0 10 0" />
+        </StackPanel>
+        
+        <StackPanel Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal">
             <Button x:Name="AddBtn" Click="Button_Click" Style="{StaticResource BtnUC}" Content="Добавить" Width="200" Height="45"/>
             <Button x:Name="EditBtn" Margin="15 0" Click="EditBtn_Click" Style="{StaticResource BtnUC}" Content="Изменить" Width="200" Height="45"/>
             <Button x:Name="ReportBtn"  Click="ReportBtn_Click" Style="{StaticResource BtnUC}" Content="Сформироват отчет" Width="200" Height="45"/>
