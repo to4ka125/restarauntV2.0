@@ -22,7 +22,7 @@ using restarauntV2._0.Forms.Waiter;
 using System.Security.Cryptography;
 using System.Drawing;
 using System.Windows.Media.Animation;
-
+using System.Threading;
 
 namespace restarauntV2._0
 {
@@ -272,5 +272,21 @@ namespace restarauntV2._0
 
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
         private static extern bool DeleteObject(IntPtr hObject);
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (captchaText == CaptchaBox.Text)
+            {
+                MessageBox.Show("Капча пройдена");
+                Grid.SetColumn(BorderAnimation, 1);
+            }
+            else
+            {
+                MessageBox.Show("Капча не пройдена");
+                Thread.Sleep(30000);
+                MessageBox.Show("Форма заблокирован на 30 секунд");
+                Grid.SetColumn(BorderAnimation, 0);
+            }
+        }
     }
 }
