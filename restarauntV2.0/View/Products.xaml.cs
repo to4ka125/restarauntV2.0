@@ -75,8 +75,8 @@ namespace restarauntV2._0.View
                 {
                     Width = 30,
                     Height = 30,
-                    Style = (Style)FindName("BtnUC"),
-                    Content = i + 1.ToString()
+                    Style = (Style)FindResource("BtnUC"),
+                    Content = (i + 1).ToString()
                 };
 
                 paginationBar.Children.Add(paginationBtn);
