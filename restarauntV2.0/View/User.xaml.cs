@@ -51,7 +51,29 @@ namespace restarauntV2._0.View
                         string email = row["Почта"].ToString();
                         string phone = row["Телефон"].ToString();
                         string login = row["Логин"].ToString();
-                        int visibleDigits = 16; 
+                        string name = row["Имя"].ToString();
+                        string lastName = row["Фамилия"].ToString();
+
+                        int visibleDigits = 16;
+
+                        if (name.Length>2)
+                        {
+                            row["Имя"] = name.Substring(0, 2) + new string('*', name.Length+2);
+                        }
+                        else
+                        {
+                            row["Имя"] = new string('*', name.Length+2);
+                        }
+
+
+                        if (lastName.Length>3)
+                        {
+                            row["Фамилия"] = lastName.Substring(0, 3) + new string('*', lastName.Length + 3);
+                        }
+                        else
+                        {
+                            row["Фамилия"] = new string('*', lastName.Length);
+                        }
 
                         if (phone.Length > visibleDigits)
                         {   
@@ -63,7 +85,7 @@ namespace restarauntV2._0.View
                         }
                         if (email.Length > 4)
                         {
-                            row["Почта"] = email.Substring(0, 4) + new string('*', email.Length - 4);
+                            row["Почта"] = email.Substring(0, 4) + new string('*', email.Length + 4);
                         }
                         else
                         {
@@ -72,7 +94,7 @@ namespace restarauntV2._0.View
 
                         if (login.Length>4)
                         {
-                            row["Логин"] = login.Substring(0, 4) + new string('*',login.Length-4); 
+                            row["Логин"] = login.Substring(0, 4) + new string('*',login.Length+4); 
                         }
                         else
                         {
