@@ -60,9 +60,16 @@ namespace restarauntV2._0.View
                         {
                             row["Телефон"] = new string('*', phone.Length);
                         }
+                        if (email.Length > 4)
+                        {
+                            row["Почта"] = email.Substring(0, 4) + new string('*', email.Length - 4);
+                        }
+                        else
+                        {
+                            row["Почта"] = new string('*', email.Length);
+                        }
 
 
-                     
                     }
                     dataGridView.ItemsSource = dt.DefaultView;
                 }
