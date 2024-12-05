@@ -76,7 +76,7 @@ namespace restarauntV2._0.View
                     Style = (Style)FindResource("BtnUC"),
                     Content = (i + 1).ToString(),
                     Margin = new Thickness(0, 0, 10, 0),
-                    
+                    Name = $"Button_{i+1}"
                 };
 
                 paginationBtn.Click += PaginationBtn_Click;
@@ -123,7 +123,7 @@ namespace restarauntV2._0.View
                     Style = (Style)FindResource("BtnUC"),
                     Content = (i + 1).ToString(),
                     Margin = new Thickness(0, 0, 10, 0),
-
+                    Name = $"Button_{i + 1}"
                 };
 
                 paginationBtn.Click += PaginationBtn_Click;
@@ -394,6 +394,21 @@ namespace restarauntV2._0.View
         {
             if (currentPage>1)
             {
+                foreach (Button items in paginationBar.Children)
+                {
+                    string[] butonName = items.Name.Split('_');
+
+                    if (butonName[1] == currentPage.ToString())
+                    {
+                        items.Style = (Style)FindResource("BtnUC");
+                        
+                    }
+                    if (butonName[1] == (currentPage-1).ToString())
+                    {
+                        items.Style = (Style)FindResource("BtnUCActive");
+                        selectedPaginationButton = items;
+                    }
+                }
                 currentPage -= 1;
                 UpdateDataGridView(query, currentPage);
             }
@@ -404,6 +419,20 @@ namespace restarauntV2._0.View
             int maxPage = (int)Math.Ceiling((double)totalRecords / pageSize);
             if (currentPage < maxPage)
             {
+                foreach (Button items in paginationBar.Children)
+                {
+                    string[] butonName = items.Name.Split('_');
+
+                    if (butonName[1] == (currentPage + 1).ToString())
+                    {
+                        items.Style = (Style)FindResource("BtnUCActive");
+                        selectedPaginationButton = items;
+                    }
+                    if (butonName[1] == currentPage.ToString())
+                    {
+                        items.Style = (Style)FindResource("BtnUC");
+                    }
+                }
                 currentPage += 1;
                 UpdateDataGridView(query, currentPage);
             }

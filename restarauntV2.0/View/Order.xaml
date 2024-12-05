@@ -133,6 +133,23 @@
         <StackPanel Grid.Row="4" VerticalAlignment="Bottom" HorizontalAlignment="Left" Orientation="Horizontal">
             <Button Name="completeBtn" Click="Button_Click" Style="{StaticResource BtnUC}" Content="Завершить заказ" Width="200" Height="45"/>
             <Button Name="cancelBtn" Click="Button_Click_1" Style="{StaticResource BtnUC}" Content="Отменить заказ" Width="200" Height="45"/>
+
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10 0">
+                    <Border Width="10" Background="#ffa799" Height="10" Margin="0 0 5 0"/>
+                    <TextBlock Style="{StaticResource textblock}" FontSize="10" Text="отменен"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="10 0">
+                    <Border Width="10" Background="#fcfbb1" Height="10" Margin="0 0 5 0"/>
+                    <TextBlock Style="{StaticResource textblock}" FontSize="10" Text="обработке"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="10 0">
+                    <Border Width="10" Background="#ccffcc" Height="10" Margin="0 0 5 0"/>
+                    <TextBlock Style="{StaticResource textblock}" FontSize="10" Text="завершен"/>
+                </StackPanel>
+            </StackPanel>
         </StackPanel>
 
     </Grid>

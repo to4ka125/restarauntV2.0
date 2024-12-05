@@ -78,7 +78,7 @@ namespace restarauntV2._0.View
 
                             case "tables":
                                 query = $@"Insert into `tables`({string.Join(",", titleField)}) Values ('{valField[0]}','{valField[1]}',
-                                            '{valField[2]}','{valField[3]}')";
+                                            '{valField[2]}')";
                                 break;
 
                             case "supplier":
@@ -121,8 +121,8 @@ namespace restarauntV2._0.View
                                     }
                                 }
 
-                                query = $@"Insert into `orders`({string.Join(",", titleField)}) Values ('{valField[0]}','{valField[1]}',
-                                            '{valField[2]}','{valField[3]}','{valField[4]}','{valField[4]}','{valField[5]}')";
+                                query = $@"INSERT INTO orders ({string.Join(",", titleField)}) VALUES 
+                                        ('{valField[0]}', '{valField[1]}', '{valField[2]}', '{valField[3]}', '{valField[4]}', '{valField[5]}')";
                                 break;
 
                             case "order_items":
@@ -149,7 +149,7 @@ namespace restarauntV2._0.View
                                     }
                                 }
 
-                                query = $@"Insert into `orders`({string.Join(",", titleField)}) Values ('{valField[0]}','{valField[1]}',
+                                query = $@"Insert into `order_items`({string.Join(",", titleField)}) Values ('{valField[0]}','{valField[1]}',
                                             '{valField[2]}')";
                                 break;
 
@@ -217,18 +217,14 @@ namespace restarauntV2._0.View
                             {
                                 cmd.ExecuteNonQuery();
                             }
-                            catch (Exception ex)
+                            catch(Exception ex)
                             {
                                 errorMsg = ex.Message;
                             }
-
-
-
                         }
                     }
            
                     MessageBox.Show("Данные импортированны");
-
                     tablesName.SelectedItem = null;
                     
                     if (errorMsg.Length > 0) MessageBox.Show(errorMsg);
