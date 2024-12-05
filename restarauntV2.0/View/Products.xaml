@@ -14,7 +14,7 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
@@ -44,7 +44,7 @@
 
         <StackPanel Grid.Row="2" Margin="0 10">
             <DataGrid x:Name="dataGridView"
-                      HeadersVisibility="Column" RowHeight="30" FontSize="14" MaxHeight="500"
+                      HeadersVisibility="Column" RowHeight="30" FontSize="14" MaxHeight="490"
                       ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
                       FontFamily="/Fonts/#Poppins" SelectionChanged="dataGridView_SelectionChanged"
                       IsReadOnly="True"
@@ -72,7 +72,7 @@
                 </DataGrid.Resources>
             </DataGrid>
         </StackPanel>
-        <StackPanel Grid.Row="3" Orientation="Horizontal" x:Name="paginationBar">
+        <StackPanel Grid.Row="3" Orientation="Horizontal" x:Name="paginationBar" Margin="0 0 0 10">
            
         </StackPanel>
         

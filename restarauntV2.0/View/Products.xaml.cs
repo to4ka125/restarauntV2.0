@@ -66,7 +66,7 @@ namespace restarauntV2._0.View
             }
 
                 EditBtn.IsEnabled = false;
-            UpdateDataGridView(query,1);
+            UpdateDataGridView(query,currentPage);
 
 
             for (int i =0; i < (int)Math.Ceiling((double)totalRecords/pageSize ); i++)
@@ -76,11 +76,21 @@ namespace restarauntV2._0.View
                     Width = 30,
                     Height = 30,
                     Style = (Style)FindResource("BtnUC"),
-                    Content = (i + 1).ToString()
+                    Content = (i + 1).ToString(),
+                    Margin = new Thickness(0,0,10,0),
                 };
 
+                paginationBtn.Click += PaginationBtn_Click;
                 paginationBar.Children.Add(paginationBtn);
             }
+        }
+
+        private void PaginationBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Button clickedButton = sender as Button;
+
+            currentPage =  int.Parse(clickedButton.Content.ToString());
+            UpdateDataGridView(query, currentPage);
         }
 
         private void searchBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -136,7 +146,7 @@ namespace restarauntV2._0.View
             }
 
 
-            UpdateDataGridView(query,1);
+            UpdateDataGridView(query, currentPage);
         }
 
         private void UpdateDataGridView(string query, int page)
@@ -188,7 +198,7 @@ namespace restarauntV2._0.View
             this.Opacity = 0.5;
 
             productsAdd.ShowDialog();
-            UpdateDataGridView(query,1);
+            UpdateDataGridView(query, currentPage);
             EditBtn.IsEnabled = false;
             Blur.workTable.Effect = null;
             Blur.workTable.IsEnabled = true;
@@ -225,7 +235,7 @@ namespace restarauntV2._0.View
                                INNER JOIN 
                                supplier ON products.supplier_id = supplier.supplier_id";
             Sorting.SelectedItem = null;
-            UpdateDataGridView(query,1);
+            UpdateDataGridView(query, currentPage);
             MessageBox.Show("Фильтры успешно очищены.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
@@ -247,7 +257,7 @@ namespace restarauntV2._0.View
 
             productsEdit.ShowDialog();
             EditBtn.IsEnabled = false;
-            UpdateDataGridView(query,1);
+            UpdateDataGridView(query, currentPage);
             Blur.workTable.Effect = null;
             Blur.workTable.IsEnabled = true;
             Blur.workTable.Opacity = 1;
