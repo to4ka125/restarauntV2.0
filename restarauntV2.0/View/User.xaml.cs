@@ -45,8 +45,26 @@ namespace restarauntV2._0.View
                     DataTable dt = new DataTable();
                     da.Fill(dt);
 
-                    dataGridView.ItemsSource = dt.DefaultView;
 
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        string email = row["почта"].ToString();
+                        string phone = row["Телефон"].ToString();
+                        int visibleDigits = 16; 
+
+                        if (phone.Length > visibleDigits)
+                        {   
+                            row["Телефон"] = phone.Substring(0, visibleDigits) + new string('*', phone.Length - visibleDigits);
+                        }
+                        else
+                        {
+                            row["Телефон"] = new string('*', phone.Length);
+                        }
+
+
+                     
+                    }
+                    dataGridView.ItemsSource = dt.DefaultView;
                 }
                 catch (Exception ex)
                 {
