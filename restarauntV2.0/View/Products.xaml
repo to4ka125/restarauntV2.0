@@ -72,8 +72,19 @@
                 </DataGrid.Resources>
             </DataGrid>
         </StackPanel>
-        <StackPanel Grid.Row="3" Orientation="Horizontal" x:Name="paginationBar" Margin="0 0 0 10">
-           
+        <StackPanel Grid.Row="3" Orientation="Horizontal"  Margin="0 0 0 10">
+            <btn:Btn Style="{StaticResource BtnBackText}" Height="66" Margin="0 0 10 0" x:Name="LeftBtn" Click="LeftBtn_Click">
+                <Image Width="22" Source="/Images/IconInterface/paginationBtn.png"/>
+            </btn:Btn>
+            <StackPanel Orientation="Horizontal" x:Name="paginationBar"/>
+
+            <btn:Btn Style="{StaticResource BtnBackText}" Height="66" Margin="0 0 10 0" x:Name="RightBtn" Click="RightBtn_Click">
+                <Image Width="22" Source="/Images/IconInterface/paginationBtn.png" RenderTransformOrigin="0.5 0.5">
+                    <Image.RenderTransform>
+                        <ScaleTransform ScaleX="-1"/>
+                    </Image.RenderTransform>
+                </Image>
+            </btn:Btn>
         </StackPanel>
         
         <StackPanel Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal">

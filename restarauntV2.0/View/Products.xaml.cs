@@ -50,8 +50,6 @@ namespace restarauntV2._0.View
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-
-
             switch (SafeData.role)
             {
                 case "Шеф":
@@ -68,7 +66,7 @@ namespace restarauntV2._0.View
                 EditBtn.IsEnabled = false;
             UpdateDataGridView(query,currentPage);
 
-
+            paginationBar.Children.Clear();
             for (int i =0; i < (int)Math.Ceiling((double)totalRecords/pageSize ); i++)
             {
                 var paginationBtn = new Button
@@ -77,17 +75,26 @@ namespace restarauntV2._0.View
                     Height = 30,
                     Style = (Style)FindResource("BtnUC"),
                     Content = (i + 1).ToString(),
-                    Margin = new Thickness(0,0,10,0),
+                    Margin = new Thickness(0, 0, 10, 0),
+                    
                 };
 
                 paginationBtn.Click += PaginationBtn_Click;
                 paginationBar.Children.Add(paginationBtn);
             }
         }
+        private Button selectedPaginationButton;
 
         private void PaginationBtn_Click(object sender, RoutedEventArgs e)
         {
             Button clickedButton = sender as Button;
+            if (selectedPaginationButton != null)
+            {
+                selectedPaginationButton.Style = (Style)FindResource("BtnUC"); 
+            }
+
+            clickedButton.Style =(Style)FindResource("BtnUCActive");
+            selectedPaginationButton = clickedButton;
 
             currentPage =  int.Parse(clickedButton.Content.ToString());
             UpdateDataGridView(query, currentPage);
@@ -100,24 +107,70 @@ namespace restarauntV2._0.View
 
         private void Sorting_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
             TextBlock textBlock = (TextBlock)Sorting.Template.FindName("textBlock", Sorting);
             textBlock.Visibility = Visibility.Collapsed;
             filteringAndSorting();
         }
+        private void UpdatePaginationButtons(int totalPages)
+        {
+            paginationBar.Children.Clear();
+            for (int i = 0; i < (int)Math.Ceiling((double)totalRecords / pageSize); i++)
+            {
+                var paginationBtn = new Button
+                {
+                    Width = 30,
+                    Height = 30,
+                    Style = (Style)FindResource("BtnUC"),
+                    Content = (i + 1).ToString(),
+                    Margin = new Thickness(0, 0, 10, 0),
+
+                };
+
+                paginationBtn.Click += PaginationBtn_Click;
+                paginationBar.Children.Add(paginationBtn);
+            }
+        }
+
+        private int GetTotalCount(string filterText)
+        {
+            string countQuery = @"SELECT COUNT(*) FROM products";
+
+            if (!string.IsNullOrEmpty(filterText))
+            {
+                countQuery += $" WHERE (name LIKE '%{filterText}%')";
+            }
+
+            using (var connection = new MySqlConnection(MySqlCon.con))
+            {
+                connection.Open();
+                using (MySqlCommand countCommand = new MySqlCommand(countQuery, connection))
+                {
+                    totalRecords = Convert.ToInt32(countCommand.ExecuteScalar());
+                    return totalRecords;
+                }
+            }
+        }
 
         private void filteringAndSorting()
         {
-            query = @"SELECT 
-                             products.product_id, 
-                             products.name AS 'Наименование', 
-                             Concat( products.quantity,' кг.') AS 'Остаток на складе', 
-                             CONCAT( products.unit_price, ' руб.') AS 'Цена за кг',
-                             supplier.name AS 'Поставщик'                                                       
-                             FROM 
-                               products
-                               INNER JOIN 
-                               supplier ON products.supplier_id = supplier.supplier_id";
+            string filterText = searchBox.Text;
+
+            int totalCount = GetTotalCount(filterText);
+
+            // Определяем количество страниц
+            int pageSize = 15; // Количество записей на странице
+            int totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
+
+            // Обновляем кнопки пагинации
+            UpdatePaginationButtons(totalPages);
+
+            query = @"SELECT products.product_id, 
+                     products.name AS 'Наименование',  
+                     Concat(products.quantity,' кг.') AS 'Остаток на складе', 
+                     CONCAT(products.unit_price, ' руб.') AS 'Цена за кг', 
+                     supplier.name AS 'Поставщик'                                                       
+              FROM products
+              INNER JOIN supplier ON products.supplier_id = supplier.supplier_id";
 
             string sortOrder = null;
             if (Sorting.SelectedItem != null)
@@ -134,10 +187,9 @@ namespace restarauntV2._0.View
                 }
             }
 
-            string filterText = searchBox.Text;
             if (!string.IsNullOrEmpty(filterText))
             {
-                    query += $" WHERE (products.name LIKE '%{filterText}%')";
+                query += $" WHERE (products.name LIKE '%{filterText}%')";
             }
 
             if (sortOrder != null)
@@ -145,8 +197,7 @@ namespace restarauntV2._0.View
                 query += " " + sortOrder;
             }
 
-
-            UpdateDataGridView(query, currentPage);
+            UpdateDataGridView(query, 1);
         }
 
         private void UpdateDataGridView(string query, int page)
@@ -336,6 +387,25 @@ namespace restarauntV2._0.View
                         MessageBox.Show("Отчет сохранен: " + filePath);
                     }
                 }
+            }
+        }
+
+        private void LeftBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPage>1)
+            {
+                currentPage -= 1;
+                UpdateDataGridView(query, currentPage);
+            }
+        }
+
+        private void RightBtn_Click(object sender, RoutedEventArgs e)
+        {
+            int maxPage = (int)Math.Ceiling((double)totalRecords / pageSize);
+            if (currentPage < maxPage)
+            {
+                currentPage += 1;
+                UpdateDataGridView(query, currentPage);
             }
         }
     }

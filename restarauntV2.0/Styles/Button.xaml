@@ -171,6 +171,32 @@
         </Setter>
     </Style>
 
+    <Style x:Key="BtnUCActive" TargetType="Button">
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontFamily" Value="/Fonts/#Poppins"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border"
+                                CornerRadius="5"
+                                BorderThickness="0"
+                                BorderBrush="#333"
+                                Background="#F85D5D">
+                        <Grid >
+                            <TextBlock x:Name="textBlock" Text="{Binding Content, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                       Foreground="#fff"
+                                   FontSize="{TemplateBinding FontSize}"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   FontFamily="{TemplateBinding FontFamily}"
+                                   
+                                   />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     <Style x:Key="BtnUC" TargetType="Button">
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="FontFamily" Value="/Fonts/#Poppins"/>
