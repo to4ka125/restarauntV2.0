@@ -40,7 +40,7 @@ namespace restarauntV2._0.View
                     con.Open();
 
                     MySqlCommand cmd = new MySqlCommand(@"Select user_id, name As 'Имя', lastName 'Фамилия', login As 'Логин', role As 'Роль', 
-                                                           email As 'почта', phone As 'Телефон' From users ", con);
+                                                           email As 'Почта', phone As 'Телефон' From users ", con);
                     MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
@@ -48,8 +48,9 @@ namespace restarauntV2._0.View
 
                     foreach (DataRow row in dt.Rows)
                     {
-                        string email = row["почта"].ToString();
+                        string email = row["Почта"].ToString();
                         string phone = row["Телефон"].ToString();
+                        string login = row["Логин"].ToString();
                         int visibleDigits = 16; 
 
                         if (phone.Length > visibleDigits)
@@ -67,6 +68,15 @@ namespace restarauntV2._0.View
                         else
                         {
                             row["Почта"] = new string('*', email.Length);
+                        }
+
+                        if (login.Length>4)
+                        {
+                            row["Логин"] = login.Substring(0, 4) + new string('*',login.Length-4); 
+                        }
+                        else
+                        {
+                            row["Логин"] = new string('*', login.Length);
                         }
 
 
