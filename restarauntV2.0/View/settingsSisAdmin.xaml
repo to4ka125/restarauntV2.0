@@ -10,7 +10,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0">
@@ -19,7 +19,7 @@
         <StackPanel Margin="15 10 0 0" Grid.Row="1">
             <StackPanel Orientation="Horizontal">
                 <TextBlock FontSize="12" Style="{StaticResource textblock}" Opacity="0.8" Text="Время бездействия пользователя: "/>
-                <TextBox MaxLength="2" x:Name="TimeBox" Style="{StaticResource pcaholderTextSearchBox}" Margin="5 0" Height="25" Tag="Задайте время бездействия" FontSize="12" Padding="0" />
+                <TextBox PreviewTextInput="TimeBox_PreviewTextInput"  MaxLength="2" x:Name="TimeBox" Style="{StaticResource pcaholderTextSearchBox}" Margin="5 0" Height="25" Tag="Задайте время бездействия" FontSize="12" Padding="0" />
             </StackPanel>
 
         </StackPanel>

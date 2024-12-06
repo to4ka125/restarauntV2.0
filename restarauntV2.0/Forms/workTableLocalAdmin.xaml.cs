@@ -47,6 +47,12 @@ namespace restarauntV2._0.Forms
                     Import import = new Import();
                     container.Children.Add(import);
                     break;
+
+
+                case "Settings":
+                    settingsSisAdmin settings = new settingsSisAdmin();
+                    container.Children.Add(settings);
+                    break;
             }
         }
     }

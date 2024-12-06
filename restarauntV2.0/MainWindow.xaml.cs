@@ -95,6 +95,9 @@ namespace restarauntV2._0
                     this.Visibility = Visibility.Collapsed;
                     workTableLocalAdmin.ShowDialog();
                     this.Visibility = Visibility.Visible;
+                    loginBox.Clear();
+                    passwordBox.Clear();
+                    return;
                 }
                 else
                 {

@@ -44,8 +44,14 @@ namespace restarauntV2._0.View
             if (MessageBox.Show("Вы хотите сохранить изменения","Предупреждение",MessageBoxButton.YesNo,MessageBoxImage.Information)==MessageBoxResult.Yes)
             {
                 Properties.Settings.Default.IdleTime = time;
+                Properties.Settings.Default.Save();
                 MessageBox.Show("Настройки сохраненны");
             }
+        }
+
+        private void TimeBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+
         }
     }
 }

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace restarauntV2._0.View
 {
@@ -19,10 +20,47 @@ namespace restarauntV2._0.View
     /// </summary>
     public partial class WorkTable : Window
     {
+        private DispatcherTimer idleTimer;
+        private int idleTimeLimit;
         public WorkTable()
         {
             InitializeComponent();
+            InitializeIdleTimer();
+            this.MouseMove += new MouseEventHandler(Window_MouseMove);
+            this.KeyDown += new KeyEventHandler(Window_KeyDown);
         }
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            ResetIdleTimer();
+        }
+        private void Window_MouseMove(object sender, MouseEventArgs e)
+        {
+            ResetIdleTimer();
+        }
+        private void ResetIdleTimer()
+        {
+            if (idleTimer.IsEnabled)
+            {
+                idleTimer.Stop();
+                idleTimer.Start();
+            }
+        }
+        private void InitializeIdleTimer()
+        {
+            idleTimeLimit = Properties.Settings.Default.IdleTime; 
+
+            idleTimer = new DispatcherTimer();
+            idleTimer.Interval = TimeSpan.FromMilliseconds(idleTimeLimit);
+            idleTimer.Tick += IdleTimer_Tick;
+            idleTimer.Start(); // Запускаем таймер
+        }
+        private void IdleTimer_Tick(object sender, EventArgs e)
+        {
+            // Блокируем систему и перенаправляем на форму авторизации
+            idleTimer.Stop();
+            this.Close();
+        }
+        
 
         private void menu_Click(object sender, RoutedEventArgs e)
         {
