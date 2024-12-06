@@ -66,6 +66,15 @@
                                 </StackPanel>
                             </Grid>
                         </Menu:Btn>
+
+                        <Menu:Btn  Style="{StaticResource BtnMenu}" Click="Restore_Click" x:Name="Settings" >
+                            <Grid>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Margin="20 0 0 0" Width="20" Source="/Images/IconImage/settings.png"/>
+                                    <TextBlock Margin="15" Style="{StaticResource textblock}" Text="Настройки пользователей"/>
+                                </StackPanel>
+                            </Grid>
+                        </Menu:Btn>
                     </StackPanel>
 
                     <StackPanel Grid.Row="3" VerticalAlignment="Bottom">
@@ -84,7 +93,7 @@
             </Border>
 
             <StackPanel x:Name="container" Grid.Column="1"  Margin="0 10">
-                <viev:Restore/>
+                <viev:settingsSisAdmin/>
             </StackPanel>
         </Grid>
     </Border>

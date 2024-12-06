@@ -12,8 +12,7 @@ namespace restarauntV2._0.View
     /// </summary>
     public partial class Order : UserControl
     {
-        string query = @"SELECT order_id As 'Номер заказа', us.name As 'Имя официанта', 
-                         us.lastName As 'Фамилия официанта', o.table_number As 'Номер стола',
+        string query = @"SELECT order_id As 'Номер заказа', concat(us.lastName,' ',Left(us.name,1),'.') AS 'ФИО', o.table_number As 'Номер стола',
                          o.status As 'Статус', o.order_time As 'Дата заказа', Concat (total_price, ' ₽') As 'Стоимость заказа' From orders o
                          inner Join users us On us.user_id  = o.user_id";
         string id;

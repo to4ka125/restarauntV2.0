@@ -39,7 +39,7 @@ namespace restarauntV2._0.View
                 {
                     con.Open();
 
-                    MySqlCommand cmd = new MySqlCommand(@"Select user_id, name As 'Имя', lastName 'Фамилия', login As 'Логин', role As 'Роль', 
+                    MySqlCommand cmd = new MySqlCommand(@"Select user_id, concat(lastName,' ',Left(name,1), '.') As 'ФИО',login As 'Логин', role As 'Роль', 
                                                            email As 'Почта', phone As 'Телефон' From users ", con);
                     MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
@@ -51,11 +51,9 @@ namespace restarauntV2._0.View
                         string email = row["Почта"].ToString();
                         string phone = row["Телефон"].ToString();
                         string login = row["Логин"].ToString();
-                        string name = row["Имя"].ToString();
-                        string lastName = row["Фамилия"].ToString();
-
-                        int visibleDigits = 16;
-
+                        
+                    
+                        /*
                         if (name.Length>2)
                         {
                             row["Имя"] = name.Substring(0, 2) + new string('*', name.Length+2);
@@ -75,22 +73,22 @@ namespace restarauntV2._0.View
                             row["Фамилия"] = new string('*', lastName.Length);
                         }
 
-                        if (phone.Length > visibleDigits)
-                        {   
-                            row["Телефон"] = phone.Substring(0, visibleDigits) + new string('*', phone.Length - visibleDigits);
+
+                        */
+
+                        if (phone.Length > 6)
+                        {
+                            string lastFiveDigits = phone.Substring(phone.Length - 5);
+                            string maskedPhone = "+7" + new string('*', phone.Length - 6) + lastFiveDigits;
+
+                            row["Телефон"] = maskedPhone;
                         }
+                      
                         else
                         {
                             row["Телефон"] = new string('*', phone.Length);
                         }
-                        if (email.Length > 4)
-                        {
-                            row["Почта"] = email.Substring(0, 4) + new string('*', email.Length + 4);
-                        }
-                        else
-                        {
-                            row["Почта"] = new string('*', email.Length);
-                        }
+                       
 
                         if (login.Length>4)
                         {
@@ -100,8 +98,6 @@ namespace restarauntV2._0.View
                         {
                             row["Логин"] = new string('*', login.Length);
                         }
-
-
                     }
                     dataGridView.ItemsSource = dt.DefaultView;
                 }

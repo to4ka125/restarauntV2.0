@@ -205,6 +205,9 @@
     <Compile Include="View\Restore.xaml.cs">
       <DependentUpon>Restore.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\settingsSisAdmin.xaml.cs">
+      <DependentUpon>settingsSisAdmin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\User.xaml.cs">
       <DependentUpon>User.xaml</DependentUpon>
     </Compile>
@@ -315,6 +318,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Restore.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\settingsSisAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -739,6 +746,7 @@
     <Content Include="Backup\restaraunt.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Images\IconImage\settings.png" />
     <Resource Include="Images\IconInterface\paginationBtn.png" />
     <Resource Include="Images\IconInterface\reload.png" />
   </ItemGroup>
